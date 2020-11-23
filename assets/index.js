@@ -158,7 +158,7 @@ function findTheId(e){
           {
                noteTitle.value = note.title
                note.content
-               
+               ckEditor.getdata = noteContent
 
           }
           console.log(clicked)
