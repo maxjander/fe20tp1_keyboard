@@ -1,111 +1,55 @@
 /* Main Style */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-body{
-     display:flex;
 
+main{
+  display:flex;
   font-family:arial,sans-serif;
   font-size:100%;
   margin:1em;
   color:black;
 }
-
+/* Layout */
+h1{
+  font-size: 2em;
+  font-weight: bolder;
+}
+h2{
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+h3{
+  font-size: 1.17em;
+  font-weight: bolder;
+}
+h4{
+  font-size: 1em;
+  font-weight: bolder;
+}
+h5{
+  font-size: .83em;
+  font-weight: bolder;
+}
+h6{
+  font-size: .67em;
+  font-weight: bolder;
+}
 
 
 /* Left Div */
 #left {
-     width: 8%;
+     width: 15%;
      border-right: 1px solid grey;
      margin-right: 5px;
 }
 
 /* Right Div */
 #right {
-     width: 92%;
+     width: 58%;
+     margin: 0 auto;
 }
 
-
-
-
-h2,p{
-  font-size:100%;
-  font-weight:normal;
-}
-#note-list,#note-list li{
-  list-style:none;
-}
-#note-list{
-  overflow:hidden;
-  padding:3em;
-}
-#note-list li {
-  text-decoration:none;
-  color:#000;
-  background:#ffc;
-  display:block;
-  height:10em;
-  width:10em;
-  padding:1em;
-  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
-  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  -moz-transition:-moz-transform .15s linear;
-  -o-transition:-o-transform .15s linear;
-  -webkit-transition:-webkit-transform .15s linear;
-}
-#note-list li{
-  margin:1em;
-  float:left;
-}
-#note-list li h2{
-  font-size:140%;
-  font-weight:bold;
-  padding-bottom:10px;
-}
-#note-list li p{
-  font-family:"Reenie Beanie",arial,sans-serif;
-  font-size:180%;
-}
-#note-list li {
-  -webkit-transform: rotate(-6deg);
-  -o-transform: rotate(-6deg);
-  -moz-transform:rotate(-6deg);
-}
-#note-list li:nth-child(even) {
-  -o-transform:rotate(4deg);
-  -webkit-transform:rotate(4deg);
-  -moz-transform:rotate(4deg);
-  position:relative;
-  top:5px;
-  background:#cfc;
-}
-#note-list li:nth-child(3n) {
-  -o-transform:rotate(-3deg);
-  -webkit-transform:rotate(-3deg);
-  -moz-transform:rotate(-3deg);
-  position:relative;
-  top:-5px;
-  background:#ccf;
-}
-#note-list li:nth-child(5n) {
-  -o-transform:rotate(5deg);
-  -webkit-transform:rotate(5deg);
-  -moz-transform:rotate(5deg);
-  position:relative;
-  top:-10px;
-}
-#note-list li a:hover,#note-list li li:focus{
-  box-shadow:10px 10px 7px rgba(0,0,0,.7);
-  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
-  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
-  -webkit-transform: scale(1.25);
-  -moz-transform: scale(1.25);
-  -o-transform: scale(1.25);
-  position:relative;
-  z-index:5;
-}
-ol{text-align:center;}
-ol li{display:inline;padding-right:1em;}
-ol li {color:#fff;}
-
-
-/* Meny */
