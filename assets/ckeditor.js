@@ -8,5 +8,3 @@ DecoupledEditor
 .catch(error => {
      console.error(error);
 });
-
-

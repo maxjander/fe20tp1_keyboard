@@ -59,8 +59,8 @@ function createNote (title, content) {
           dateModified: null,
           favorite: false,
      })
-     saveNotes('')
-     return note
+     saveNotes()
+     return 
 }
 
 // function findNoteById(noteId){
@@ -157,11 +157,12 @@ function findTheId(e){
           if(note.id == clickedId)
           {
                noteTitle.value = note.title
-               note.content
-               ckEditor.getdata = noteContent
+               ckEditor.innerHTML =  note.content
 
+
+               console.log(note.content)
+               console.log(note.title)
           }
-          console.log(clicked)
      })
      
 }
