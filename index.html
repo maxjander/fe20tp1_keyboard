@@ -9,6 +9,7 @@
      <script src="assets/index.js" defer></script><!-- Main js -->
      <script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/decoupled-document/ckeditor.js"></script>
      <script src="assets/ckeditor.js" defer></script><!-- Main js -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js " defer></script>
 
 </head>
 
@@ -19,8 +20,10 @@
                <div class="allTitles"></div>
           </div>
           <div id='right'>
-               <h1>Welcome to Quire</h1>
-               <h6>Write your note!</h6>
+               <div id="info-text">
+                    <h1>Welcome to Quire</h1>
+                    <h6>Write your note!</h6>
+               </div>
                <br>
                <label>Title: </label>
                <br>
@@ -36,10 +39,8 @@
                     <textarea id="testIt"></textarea>
                </div>
                <button id="save-btn">Save</button>
-               <button id="load-btn">Load</button>
-               <div id="showAllNotes">
-                    <ul id="note-list"></ul>
-               </div>
+               <button id="delete-btn">Delete</button>
+
           </div>
      </main>
 

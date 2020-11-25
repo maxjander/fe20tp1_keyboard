@@ -2,7 +2,7 @@
 let leftDiv = document.querySelector('#left')
 let rightDiv = document.querySelector('#right')
 let saveBtn = document.querySelector('#save-btn')
-let loadAll = document.querySelector('#load-btn')
+let deleteBtn = document.querySelector('#delete-btn')
 let noteTitle = document.querySelector('#note-title') //The Note title you want to add
 let editorEl = document.querySelector('#editor') // The editor
 let showAllNotes = document.querySelector('#showAllNotes') // The editor
@@ -10,12 +10,14 @@ let noteContent = document.querySelector('#note-content')
 let noteUl = document.querySelector('#note-list')
 let allTitles = document.querySelector('#allTitles h2')
 let textArea = document.querySelector('#textArea')
+let infoText = document.querySelector('#info-text')
 
 // Event listeners
 
 editorEl.addEventListener('click', e => e.target)
-saveBtn.addEventListener('click', saveBtnClicked)
+saveBtn.addEventListener('click', checkLocalStorage)
 leftDiv.addEventListener('click', findTheId) // Find the id of the title you click on
+deleteBtn.addEventListener('click', deleteNote) // Find the id of the title you click on
 
 // Global Variables
 let notes =[]
@@ -42,8 +44,23 @@ function createNote (title, content) {
           favorite: false,
      })
      saveNotes()
-     return 
+     document.location.reload(true)
+     
 }
+
+function deleteNote(e) {
+     notes.push(...getNotes())
+     
+     console.log(notes)
+     notes.splice(e.target.value, 1, )
+     console.log(notes)
+
+     saveNotes()
+      notes = []
+      document.location.reload(true)
+}
+
+
 
 function modifieNote(currentNote) {
      let note = {
@@ -58,11 +75,13 @@ function modifieNote(currentNote) {
 
 function findTheId(e){ 
      let clickedId = e.target.id
-     getNotes().filter(note => {
+     getNotes().filter((note,i)=> {
           if(note.id == clickedId)
           {
                noteTitle.value = note.title
                go(note.content)
+               deleteBtn.value=i 
+               infoText.innerHTML = (`<h4> ${moment().locale('sv').from(note.id)}</h4>`)     
           }
      })
 }
@@ -70,8 +89,17 @@ function findTheId(e){
 function saveBtnClicked(e){
      createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!'  ,editorEl.innerHTML)
      saveNotes()
+     
+
 }
 
+function checkLocalStorage() {
+  if (localStorage.getItem('Notes')) {
+    notes.push(...getNotes())
+  }
+  saveBtnClicked()
+  notes = []
+}
 
 
 // Show all titles in the left  div (, )
