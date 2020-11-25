@@ -2,7 +2,7 @@
 let leftDiv = document.querySelector('#left')
 let rightDiv = document.querySelector('#right')
 let saveBtn = document.querySelector('#save-btn')
-let loadAll = document.querySelector('#load-btn')
+let deleteBtn = document.querySelector('#delete-btn')
 let noteTitle = document.querySelector('#note-title') //The Note title you want to add
 let editorEl = document.querySelector('#editor') // The editor
 let showAllNotes = document.querySelector('#showAllNotes') // The editor
@@ -10,12 +10,13 @@ let noteContent = document.querySelector('#note-content')
 let noteUl = document.querySelector('#note-list')
 let allTitles = document.querySelector('#allTitles h2')
 let textArea = document.querySelector('#textArea')
-
+let OnloadWindow = window
 // Event listeners
-
 editorEl.addEventListener('click', e => e.target)
 saveBtn.addEventListener('click', saveBtnClicked)
+deleteBtn.addEventListener('click', deleteNote)
 leftDiv.addEventListener('click', findTheId) // Find the id of the title you click on
+OnloadWindow.addEventListener('load', loadOnStart )
 
 // Global Variables
 let notes =[]
@@ -28,11 +29,9 @@ function getNotes() {
      let convertedData = JSON.parse(retriveddata)
      return convertedData
 } 
-
 function saveNotes() {
           localStorage.setItem('Notes', JSON.stringify(notes))
 }
-
 function createNote (title, content) {
      notes.push( {
           id: Date.now(),
@@ -42,7 +41,13 @@ function createNote (title, content) {
           favorite: false,
      })
      saveNotes()
-     return 
+
+}
+function deleteNote(){
+
+     notes.splice(deleteBtn.value,)
+     saveNotes()
+     location.reload();
 }
 
 function modifieNote(currentNote) {
@@ -55,36 +60,35 @@ function modifieNote(currentNote) {
      }
      return note
 }
-
 function findTheId(e){ 
      let clickedId = e.target.id
-     getNotes().filter(note => {
+     
+     getNotes().filter((note, index) => {
           if(note.id == clickedId)
           {
                noteTitle.value = note.title
+               deleteBtn.setAttribute('value', index ) 
                go(note.content)
           }
      })
 }
-
 function saveBtnClicked(e){
-     createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!'  ,editorEl.innerHTML)
+     createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!', editorEl.innerHTML)
      saveNotes()
+     location.reload();
 }
-
-
-
-// Show all titles in the left  div (, )
-window.onload = function(){
-     let myNotesObj = getNotes()
-     myNotesObj.map(note =>{
-
-          let title = document.createElement('h5')  
-
-          title.innerText = note.title
-          title.setAttribute('id', note.id)
-           leftDiv.appendChild(title)
-     })
+function loadOnStart(){
+     if(getNotes()){
+          notes = getNotes()
+          let myNotesObj = getNotes()
+          myNotesObj.map(note =>{
+               let title = document.createElement('h5')  
+               title.innerText = note.title
+               title.setAttribute('id', note.id)
+               leftDiv.appendChild(title)
+          })  
+     }
+     
 }
 
 
