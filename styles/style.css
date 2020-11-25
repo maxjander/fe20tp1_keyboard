@@ -1,1 +1,55 @@
 /* Main Style */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+main{
+  display:flex;
+  font-family:arial,sans-serif;
+  font-size:100%;
+  margin:1em;
+  color:black;
+}
+/* Layout */
+h1{
+  font-size: 2em;
+  font-weight: bolder;
+}
+h2{
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+h3{
+  font-size: 1.17em;
+  font-weight: bolder;
+}
+h4{
+  font-size: 1em;
+  font-weight: bolder;
+}
+h5{
+  font-size: .83em;
+  font-weight: bolder;
+}
+h6{
+  font-size: .67em;
+  font-weight: bolder;
+}
+
+
+/* Left Div */
+#left {
+     width: 15%;
+     border-right: 1px solid grey;
+     margin-right: 5px;
+}
+
+/* Right Div */
+#right {
+     width: 58%;
+     margin: 0 auto;
+}
+

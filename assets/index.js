@@ -1,60 +1,49 @@
-// Add a commit
+// Selectors
+let leftDiv = document.querySelector('#left')
+let rightDiv = document.querySelector('#right')
+let saveBtn = document.querySelector('#save-btn')
+let loadAll = document.querySelector('#load-btn')
+let noteTitle = document.querySelector('#note-title') //The Note title you want to add
+let editorEl = document.querySelector('#editor') // The editor
+let showAllNotes = document.querySelector('#showAllNotes') // The editor
+let noteContent = document.querySelector('#note-content')
+let noteUl = document.querySelector('#note-list')
+let allTitles = document.querySelector('#allTitles h2')
+let textArea = document.querySelector('#textArea')
+
+// Event listeners
+
+editorEl.addEventListener('click', e => e.target)
+saveBtn.addEventListener('click', saveBtnClicked)
+leftDiv.addEventListener('click', findTheId) // Find the id of the title you click on
+
+// Global Variables
 let notes =[]
 
-// function addNote() {
-//      // Making a loop that push 3 instances of note withe 
-//      for(let i = 0; i<3; i++)
-//      {
-//           let note = {
-//                id: null,
-//                title: '',
-//                note:'',
-//                date:null,
-//                favorit:false,
-//           }
-//           note.id = i
-//           note.title = 'Your title'
-//           note.note = 'This is a note.'
-//           note.date = new Date().toLocaleString('se')
-          
-//           console.log(note.id)
-//           notes.push(note)
-//      }
-//        return note
-// }
-
-// console.log(addNote())
-// console.log(notes)
-
-
+// Functions
 function getNotes() {
      // laddar från localStorage
-     let data = localStorage.getItem('Notes')
+     let retriveddata = localStorage.getItem('Notes')
      // returnerar alla notes som en array av obj
-     let convertedData = JSON.parse(data)
+     let convertedData = JSON.parse(retriveddata)
      return convertedData
 } 
 
-function saveNotes(notes) {
-
+function saveNotes() {
           localStorage.setItem('Notes', JSON.stringify(notes))
-
 }
 
-function createNote (title="", content = "") {
-     let note = {
+function createNote (title, content) {
+     notes.push( {
           id: Date.now(),
-          title,
-          content,
+          title: title,
+          content: content,
           dateModified: null,
           favorite: false,
-     }
-     return note
+     })
+     saveNotes()
+     return 
 }
-
-// function findNoteById(noteId){
-   
-// }
 
 function modifieNote(currentNote) {
      let note = {
@@ -67,14 +56,58 @@ function modifieNote(currentNote) {
      return note
 }
 
-saveNotes(createNote('Köp-Lista', 'Köp chokladglass'))
-getNotes(notes)
-
-function testNotes (n) {
-          let notes = [];
-          for(let i = 1; i < n; i++) {
-               notes.push(createNote())
+function findTheId(e){ 
+     let clickedId = e.target.id
+     getNotes().filter(note => {
+          if(note.id == clickedId)
+          {
+               noteTitle.value = note.title
+               go(note.content)
           }
-     return notes;
+     })
 }
-saveNotes(testNotes(5))
+
+function saveBtnClicked(e){
+     createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!'  ,editorEl.innerHTML)
+     saveNotes()
+}
+
+
+
+// Show all titles in the left  div (, )
+window.onload = function(){
+     let myNotesObj = getNotes()
+     myNotesObj.map(note =>{
+
+          let title = document.createElement('h5')  
+
+          title.innerText = note.title
+          title.setAttribute('id', note.id)
+           leftDiv.appendChild(title)
+     })
+}
+
+
+
+
+
+// Check the id of the clicked Title
+
+
+// Find the matched obj...
+
+// Good To Have Stuff
+// // Append all notes
+// function appendAllNotes(){
+//      let myNotesObj = getNotes()
+//      myNotesObj.map(note =>{
+//           let title = note.title
+//           let content = note.content
+//           let fullNoteLi = document.createElement('li')
+
+
+//           fullNoteLi.innerHTML = `<h2>${title}</h2> <p>${content}</p>`
+//           noteUl.appendChild(fullNoteLi)
+          
+//      })
+// }
