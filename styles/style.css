@@ -45,11 +45,20 @@ h6{
      width: 15%;
      border-right: 1px solid grey;
      margin-right: 5px;
+     background-color: #E5E5E5;
+     
+     
 }
 
 /* Right Div */
 #right {
      width: 58%;
      margin: 0 auto;
+     background-color: #E5E5E5
+     
+     
 }
-
+#editor {
+    background-color:#ffffff;
+    border-left: 1px;
+}
