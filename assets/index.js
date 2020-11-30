@@ -1,5 +1,6 @@
 // Selectors
-let leftDiv = document.querySelector('#left')
+let leftDiv = document.querySelector('#left')  
+let searchNoteInputEl = document.querySelector('#search-note')
 let rightDiv = document.querySelector('#right')
 let saveBtn = document.querySelector('#save-btn')
 let deleteBtn = document.querySelector('#delete-btn')
@@ -8,10 +9,13 @@ let editorEl = document.querySelector('#editor') // The editor
 let showAllNotes = document.querySelector('#showAllNotes') // The editor
 let noteContent = document.querySelector('#note-content')
 let noteUl = document.querySelector('#note-list')
-let allTitles = document.querySelector('#allTitles h2')
+let allTitles = document.querySelector('#allTitles')
 let textArea = document.querySelector('#textArea')
 let OnloadWindow = window
+
+
 // Event listeners
+searchNoteInputEl.addEventListener('change', findNote)
 editorEl.addEventListener('click', e => e.target)
 saveBtn.addEventListener('click', saveBtnClicked)
 deleteBtn.addEventListener('click', deleteNote)
@@ -20,8 +24,24 @@ OnloadWindow.addEventListener('load', loadOnStart )
 
 // Global Variables
 let notes =[]
-
 // Functions
+function findNote(){
+     console.log(allTitles)
+    console.log(searchNoteInputEl.value) 
+    getNotes().filter((note, index) => {
+     
+     if(note.title.toLowerCase() === searchNoteInputEl.value.toLowerCase()){           
+            
+                    let title = document.createElement('h5')  
+                    title.innerText = note.title
+                    title.setAttribute('id', note.id)
+                    leftDiv.appendChild(title)
+              
+          } 
+          
+    })
+
+}
 function getNotes() {
      // laddar från localStorage
      let retriveddata = localStorage.getItem('Notes')
@@ -47,9 +67,8 @@ function deleteNote(){
 
      notes.splice(deleteBtn.value,)
      saveNotes()
-     location.reload();
+     window['location'].reload()
 }
-
 function modifieNote(currentNote) {
      let note = {
           id: currentNote.id,
@@ -60,14 +79,15 @@ function modifieNote(currentNote) {
      }
      return note
 }
-function findTheId(e){ 
-     let clickedId = e.target.id
-     
+function findTheId(event){ 
+     let clickedId = event.target.id
      getNotes().filter((note, index) => {
           if(note.id == clickedId)
           {
+               // Skapa ett attribut till knappen som heter value
+                    // index
                noteTitle.value = note.title
-               deleteBtn.setAttribute('value', index ) 
+               deleteBtn.setAttribute('value', index)
                go(note.content)
           }
      })
@@ -75,7 +95,7 @@ function findTheId(e){
 function saveBtnClicked(e){
      createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!', editorEl.innerHTML)
      saveNotes()
-     location.reload();
+     window['location'].reload();
 }
 function loadOnStart(){
      if(getNotes()){
@@ -85,7 +105,7 @@ function loadOnStart(){
                let title = document.createElement('h5')  
                title.innerText = note.title
                title.setAttribute('id', note.id)
-               leftDiv.appendChild(title)
+               title.appendChild(allTitles)
           })  
      }
      
