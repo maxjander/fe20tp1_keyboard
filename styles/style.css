@@ -8,6 +8,8 @@
 
 main{
   display:flex;
+  justify-content: flex-start;
+
   font-family:arial,sans-serif;
   font-size:100%;
   margin:1em;
@@ -39,29 +41,38 @@ h6{
   font-weight: bolder;
 }
 
-
 /* Left Div */
 #left {
+     margin: 0;
      width: 15%;
-     border-right: 1px solid grey;
-     margin-right: 5px;
      background-color: #E5E5E5;
-     
-     
 }
 
 /* Right Div */
 #right {
-     width: 58%;
-     margin: 0 auto;
-     background-color: #E5E5E5
-     
-     
+     width:85% ;
+     padding-left: 20px;
+     background-color: #ffffff;
 }
 #editor {
     background-color:#ffffff;
 }
-
+#editor:focus, #editor:hover  {
+  outline:none;
+  border-style: none; 
+  border-color: Transparent; 
+  overflow: auto; 
+  all: none; 
+  box-shadow: none;
+}
+#editor:focus{
+  min-height: 80vh;
+  
+}
+.ck-blurred{
+  min-height: 80vh;
+  
+}
 
 
 
