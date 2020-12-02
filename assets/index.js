@@ -11,6 +11,9 @@ let noteUl = document.querySelector('#note-list')
 let allTitles = document.querySelector('#allTitles h2')
 let textArea = document.querySelector('#textArea')
 let OnloadWindow = window
+
+
+
 // Event listeners
 editorEl.addEventListener('click', e => e.target)
 saveBtn.addEventListener('click', saveBtnClicked)
@@ -69,7 +72,7 @@ function findTheId(e){
                noteTitle.value = note.title
                deleteBtn.setAttribute('value', index ) 
                console.log(deleteBtn)
-               editor.setData(note.content)
+               editor.setData(`<h1>${noteTitle.value}</h1> <br> ${note.content}`)
                
           }
      })

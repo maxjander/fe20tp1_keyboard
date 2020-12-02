@@ -1,8 +1,7 @@
 BalloonEditor
     .create( document.querySelector( '#editor' ) )
-    .then( newEditor => {
-        editor = newEditor
-        
+    .then( editor => {
+        window.editor = editor;
     } )
     .catch( error => {
         console.error( error );
