@@ -12,10 +12,17 @@ let noteUl = document.querySelector('#note-list')
 let allTitles = document.querySelector('#allTitles')
 let textArea = document.querySelector('#textArea')
 let OnloadWindow = window
+<<<<<<< HEAD
 
 
 // Event listeners
 searchNoteInputEl.addEventListener('change', findNote)
+=======
+
+
+
+// Event listeners
+>>>>>>> main
 editorEl.addEventListener('click', e => e.target)
 saveBtn.addEventListener('click', saveBtnClicked)
 deleteBtn.addEventListener('click', deleteNote)
@@ -63,6 +70,15 @@ function createNote (title, content) {
      })
      saveNotes()
 
+<<<<<<< HEAD
+=======
+}
+function deleteNote(){
+
+     notes.splice(deleteBtn.value,1)
+     saveNotes()
+     location.reload();
+>>>>>>> main
 }
 function deleteNote(){
 
@@ -80,6 +96,7 @@ function modifieNote(currentNote) {
      }
      return note
 }
+<<<<<<< HEAD
 function findTheId(event){  
      let clickedId = event.target.id   // hitta från titeln
      getNotes().filter((note, index) => { // getNotes är localstorage
@@ -90,12 +107,26 @@ function findTheId(event){
                noteTitle.value = note.title         // vänstra sida a från formen, högra sidan är localstorage
                deleteBtn.setAttribute('value', index)   // Den hämtar value från localstorage
                go(note.content)
+=======
+function findTheId(e){ 
+     let clickedId = e.target.id
+     
+     getNotes().filter((note, index) => {
+          if(note.id == clickedId)
+          {
+               noteTitle.value = note.title
+               deleteBtn.setAttribute('value', index ) 
+               console.log(deleteBtn)
+               editor.setData(`<h1>${noteTitle.value}</h1> <br> ${note.content}`)
+               
+>>>>>>> main
           }
      })
 }
 function saveBtnClicked(e){
      createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!', editorEl.innerHTML)
      saveNotes()
+<<<<<<< HEAD
      window['location'].reload();
 }
 function loadOnStart(){
@@ -116,6 +147,24 @@ function loadOnStart(){
 // Som användare vill jag kunna välja bland några olika mallar för att ställa in typsnitt för rubriker och brödtext i applikationen så det känns bra att skriva mina texter
 
 // 
+=======
+     location.reload();
+}
+function loadOnStart(){
+     if(getNotes()){
+          notes = getNotes()
+          let myNotesObj = getNotes()
+          myNotesObj.map(note =>{
+               let title = document.createElement('h5')  
+               title.innerText = note.title
+               title.setAttribute('id', note.id)
+               leftDiv.appendChild(title)
+          })  
+     }
+     
+}
+
+>>>>>>> main
 
 
 
