@@ -22,8 +22,8 @@ leftDiv.addEventListener('click', findTheId) // Find the id of the title you cli
 OnloadWindow.addEventListener('load', loadOnStart )
 
 // Global Variables
-let notes =[]
-
+let notes = []
+let clickedId = null
 // Functions
 function getNotes() {
      // laddar från localStorage
@@ -32,20 +32,23 @@ function getNotes() {
      let convertedData = JSON.parse(retriveddata)
      return convertedData
 } 
+
 function saveNotes() {
           localStorage.setItem('Notes', JSON.stringify(notes))
 }
+
 function createNote (title, content) {
+     // 
      notes.push( {
           id: Date.now(),
-          title: title,
-          content: content,
+          title,
+          content,
           dateModified: null,
           favorite: false,
      })
      saveNotes()
-
 }
+
 function deleteNote(){
 
      notes.splice(deleteBtn.value,1)
@@ -64,29 +67,31 @@ function modifieNote(currentNote) {
      return note
 }
 function findTheId(e){ 
-     let clickedId = e.target.id
+     clickedId = e.target
      
      getNotes().filter((note, index) => {
-          if(note.id == clickedId)
+          if(note.id == clickedId.id)
           {
-               noteTitle.value = note.title
-               deleteBtn.setAttribute('value', index ) 
-               console.log(deleteBtn)
-               editor.setData(`<h1>${noteTitle.value}</h1> <br> ${note.content}`)
+               clickedId.setAttribute('backgroundColor', '#ffffff')
+               noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
+               deleteBtn.setAttribute('value', index )
+               editor.setData(`<h1>${note.title}</h1> <br> ${note.content}`)
                
           }
      })
 }
+
 function saveBtnClicked(e){
      createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!', editorEl.innerHTML)
      saveNotes()
      location.reload();
 }
+
 function loadOnStart(){
+     
      if(getNotes()){
           notes = getNotes()
-          let myNotesObj = getNotes()
-          myNotesObj.map(note =>{
+          notes.map( note => {
                let title = document.createElement('h5')  
                title.innerText = note.title
                title.setAttribute('id', note.id)
@@ -95,6 +100,35 @@ function loadOnStart(){
      }
      
 }
+
+function printNote(id) {
+     id = clickedId
+     let = printEl = document.createElement('div')
+     printEl.setAttribute('id', 'printMe')
+
+     let myTitle = document.createElement('h2')
+     let myParagrapf = document.createElement('p')
+
+     myTitle.innerText = document.querySelector(`#${id}`).firstChild.innerText= 'sdadsad'
+     myParagrapf.innerText=document.querySelector(`#${$theId}`).innerText
+
+     return `${id}`
+}
+
+// function loadOnStart(){
+//      let myNotesObj 
+//      if(myNotesObj = notes = getNotes()){
+//           // notes = getNotes()
+//           // let myNotesObj = getNotes()
+//           myNotesObj.map(note =>{
+//                let title = document.createElement('h5')  
+//                title.innerText = note.title
+//                title.setAttribute('id', note.id)
+//                leftDiv.appendChild(title)
+//           })  
+//      }
+     
+// }
 
 
 
