@@ -1,4 +1,4 @@
-// Selectors
+// Selectors  ()
 let leftDiv = document.querySelector('#left')  
 let searchNoteInputEl = document.querySelector('#search-note')
 let rightDiv = document.querySelector('#right')
@@ -23,7 +23,7 @@ leftDiv.addEventListener('click', findTheId) // Find the id of the title you cli
 OnloadWindow.addEventListener('load', loadOnStart )
 
 // Global Variables
-let notes =[]
+let notes =[]  // Den globala variablen
 // Functions
 function findNote(){
      console.log(allTitles)
@@ -43,22 +43,23 @@ function findNote(){
 
 }
 function getNotes() {
-     // laddar från localStorage
+     // laddar från localStorage,    all value som finns i note hämta den. 
      let retriveddata = localStorage.getItem('Notes')
      // returnerar alla notes som en array av obj
      let convertedData = JSON.parse(retriveddata)
-     return convertedData
+     return convertedData // 
 } 
 function saveNotes() {
-          localStorage.setItem('Notes', JSON.stringify(notes))
+          localStorage.setItem('Notes', JSON.stringify(notes)) // För att spara i localstorage måste vi göra det till en string först från (let notes =[])
 }
 function createNote (title, content) {
+     // Den gör ingenting just nu
      notes.push( {
           id: Date.now(),
-          title: title,
+          title: title, // Vi får title och contetnt från 
           content: content,
           dateModified: null,
-          favorite: false,
+          favorite: false, 
      })
      saveNotes()
 
@@ -66,7 +67,7 @@ function createNote (title, content) {
 function deleteNote(){
 
      notes.splice(deleteBtn.value,)
-     saveNotes()
+     saveNotes() // sparar även i localstorage 
      window['location'].reload()
 }
 function modifieNote(currentNote) {
@@ -79,15 +80,15 @@ function modifieNote(currentNote) {
      }
      return note
 }
-function findTheId(event){ 
-     let clickedId = event.target.id
-     getNotes().filter((note, index) => {
+function findTheId(event){  
+     let clickedId = event.target.id   // hitta från titeln
+     getNotes().filter((note, index) => { // getNotes är localstorage
           if(note.id == clickedId)
           {
                // Skapa ett attribut till knappen som heter value
                     // index
-               noteTitle.value = note.title
-               deleteBtn.setAttribute('value', index)
+               noteTitle.value = note.title         // vänstra sida a från formen, högra sidan är localstorage
+               deleteBtn.setAttribute('value', index)   // Den hämtar value från localstorage
                go(note.content)
           }
      })
@@ -105,7 +106,7 @@ function loadOnStart(){
                let title = document.createElement('h5')  
                title.innerText = note.title
                title.setAttribute('id', note.id)
-               title.appendChild(allTitles)
+               title.appendChild(allTitles) //appenchild sätter in saker i nåt, i det här fallet titles
           })  
      }
      
