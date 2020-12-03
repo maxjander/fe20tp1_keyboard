@@ -1,6 +1,5 @@
-// Selectors  ()
-let leftDiv = document.querySelector('#left')  
-let searchNoteInputEl = document.querySelector('#search-note')
+// Selectors
+let leftDiv = document.querySelector('#left')
 let rightDiv = document.querySelector('#right')
 let saveBtn = document.querySelector('#save-btn')
 let deleteBtn = document.querySelector('#delete-btn')
@@ -9,8 +8,11 @@ let editorEl = document.querySelector('#editor') // The editor
 let showAllNotes = document.querySelector('#showAllNotes') // The editor
 let noteContent = document.querySelector('#note-content')
 let noteUl = document.querySelector('#note-list')
-let allTitles = document.querySelector('#allTitles')
+let allTitles = document.querySelector('#allTitles h2')
 let textArea = document.querySelector('#textArea')
+let noteLabel = document.querySelector('#note-label')
+let infoText = document.querySelector('#info-text')
+let textTemplates = document.querySelector('#text-templates')
 let OnloadWindow = window
 
 
@@ -23,58 +25,30 @@ leftDiv.addEventListener('click', findTheId) // Find the id of the title you cli
 OnloadWindow.addEventListener('load', loadOnStart )
 
 // Global Variables
-<<<<<<< HEAD
-let notes =[]  // Den globala variablen
-=======
 let notes = []
 let clickedId = null
->>>>>>> main
+let clickedTemp
 // Functions
-function findNote(){
-     console.log(allTitles)
-    console.log(searchNoteInputEl.value) 
-    getNotes().filter((note, index) => {
-     
-     if(note.title.toLowerCase() === searchNoteInputEl.value.toLowerCase()){           
-            
-                    let title = document.createElement('h5')  
-                    title.innerText = note.title
-                    title.setAttribute('id', note.id)
-                    leftDiv.appendChild(title)
-              
-          } 
-          
-    })
-
-}
 function getNotes() {
-     // laddar från localStorage,    all value som finns i note hämta den. 
+     // laddar från localStorage
      let retriveddata = localStorage.getItem('Notes')
      // returnerar alla notes som en array av obj
      let convertedData = JSON.parse(retriveddata)
-     return convertedData // 
-} 
-
-function saveNotes() {
-          localStorage.setItem('Notes', JSON.stringify(notes)) // För att spara i localstorage måste vi göra det till en string först från (let notes =[])
+     return convertedData
 }
 
-function createNote (title, content) {
-<<<<<<< HEAD
-     // Den gör ingenting just nu
-     notes.push( {
-          id: Date.now(),
-          title: title, // Vi får title och contetnt från 
-          content: content,
-=======
-     // 
+function saveNotes() {
+          localStorage.setItem('Notes', JSON.stringify(notes))
+}
+
+function createNote (title, content,contentTemplate) {
      notes.push( {
           id: Date.now(),
           title,
           content,
->>>>>>> main
+          contentTemplate,
           dateModified: null,
-          favorite: false, 
+          favorite: false,
      })
      saveNotes()
 }
@@ -85,69 +59,78 @@ function deleteNote(){
      saveNotes()
      location.reload();
 }
-function deleteNote(){
 
-     notes.splice(deleteBtn.value,)
-     saveNotes() // sparar även i localstorage 
-     window['location'].reload()
-}
 function modifieNote(currentNote) {
      let note = {
           id: currentNote.id,
           title: currentNote.title,
           content: currentNote.content,
+          contentTemplate: currentNote.contentTemplate,
           dateModified: Date.now(),
           favorite: currentNote.favorite,
      }
      return note
 }
-function findTheId(e){ 
-<<<<<<< HEAD
-     let clickedId = e.target.id  // hitta från titeln
-     
-     getNotes().filter((note, index) => {  // getNotes är localstorage
-          if(note.id == clickedId)
-
-          // Skapa ett attribut till knappen som heter value
-          {
-               noteTitle.value = note.title  // vänstra sida a från formen, högra sidan är localstorage
-               deleteBtn.setAttribute('value', index )  // Den hämtar value från localstorage 
-               console.log(deleteBtn)
-               editor.setData(`<h1>${noteTitle.value}</h1> <br> ${note.content}`)
-=======
+function findTheId(e){
      clickedId = e.target
-     
+
      getNotes().filter((note, index) => {
           if(note.id == clickedId.id)
           {
+               textTemplates.remove()
+               infoText.remove()
                clickedId.setAttribute('backgroundColor', '#ffffff')
                noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
                deleteBtn.setAttribute('value', index )
-               editor.setData(`<h1>${note.title}</h1> <br> ${note.content}`)
->>>>>>> main
-               
+               editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length-1])
+               editor.ui.view.editable.element.classList.add(note.contentTemplate)
+               let favoritIcon = document.createElement('span')
+               favoritIcon.innerHTML = ""
+               editor.setData(`${note.content}`)   // Tog bort Title, pga blir dubbelt varje gång man sparar
+
           }
      })
 }
 
+function selectedTemp(){
+     const rbs = document.querySelectorAll('input[name="text-temp"]');
+     let selectedValue;
+
+     rbs.forEach(rb => {
+          if(rb.checked) {
+               selectedValue = rb.value;
+          }
+     })
+     return selectedValue
+}
+
 function saveBtnClicked(e){
-     createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!', editorEl.innerHTML)
+     let selected = selectedTemp()
+     createNote(
+          noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!',
+          editorEl.innerHTML, selected
+
+      )
      saveNotes()
      location.reload();
 }
 
 function loadOnStart(){
-     
+
      if(getNotes()){
           notes = getNotes()
           notes.map( note => {
-               let title = document.createElement('h5')  
+              let timeDispl = moment(note.id).fromNow()
+              let title = document.createElement('h5')
+
                title.innerText = note.title
                title.setAttribute('id', note.id)
+               title.setAttribute('title', `Created: ${timeDispl}`)
+               console.log(timeDispl);
                leftDiv.appendChild(title)
-          })  
+          })
      }
-     
+
 }
 
 function printNote(id) {
@@ -165,18 +148,18 @@ function printNote(id) {
 }
 
 // function loadOnStart(){
-//      let myNotesObj 
+//      let myNotesObj
 //      if(myNotesObj = notes = getNotes()){
 //           // notes = getNotes()
 //           // let myNotesObj = getNotes()
 //           myNotesObj.map(note =>{
-//                let title = document.createElement('h5')  
+//                let title = document.createElement('h5')
 //                title.innerText = note.title
 //                title.setAttribute('id', note.id)
 //                leftDiv.appendChild(title)
-//           })  
+//           })
 //      }
-     
+
 // }
 
 
@@ -200,6 +183,6 @@ function printNote(id) {
 
 //           fullNoteLi.innerHTML = `<h2>${title}</h2> <p>${content}</p>`
 //           noteUl.appendChild(fullNoteLi)
-          
+
 //      })
 // }

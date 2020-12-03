@@ -15,6 +15,15 @@ main{
   margin:1em;
   color:black;
 }
+#note-title {
+  font-size: 1.5em;
+  border: none;
+  outline: none;
+}
+
+#info-text {
+  margin-bottom: 30px;
+}
 /* Layout */
 h1{
   font-size: 2em;
@@ -41,23 +50,87 @@ h6{
   font-weight: bolder;
 }
 
+
+.temp1 {
+  font-family: 'Nerko One', cursive;
+  color:black;
+}
+.temp1 > h2{
+  font-size: 2em;
+  color: rgb(75, 184, 148);
+}
+.temp1 h3{
+  font-size: 1.17em;
+}
+.temp1 h4{
+  font-size: 1em;
+}
+.temp2 {
+  font-family: 'Source Code Pro', monospace;
+  color: black;
+}
+.temp2 > h2{
+  color: rgb(174, 139, 250);
+
+  size: 4em;
+}
+.temp2 h3{
+  font-size: 1.17em;
+}
+.temp2 h4{
+  font-size: 1em;
+}
+.temp3 {
+  font-family: 'Castoro', serif;
+  color:black;
+}
+.temp3 > h2{
+  font-size: 1.5em;
+}
+.temp3 h3{
+  font-size: 1.17em;
+}
+.temp3 h4{
+  font-size: 1em;
+}
+.temp4 {
+  font-family: 'Indie Flower', cursive;
+  color:black;
+}
+.temp4  > h2{
+  color: rgb(165, 16, 16);
+  font-size: 1.9em;
+}
+.temp4 h3{
+  font-size: 1.17em;
+}
+.temp4 h4{
+  font-size: 1em;
+}
+
+
+
 /* Left Div */
 #left {
      margin: 0;
      width: 15%;
      background-color: #E5E5E5;
+     padding-right: 20px;
 }
 
 /* Right Div */
 #right {
-     width:85% ;
+    text-align: center;
+     margin: 0 auto;
+     min-width:5%;
+     max-width: 750px;
      padding-left: 20px;
      background-color: #ffffff;
 }
 #editor {
+  
     background-color:#ffffff;
-    border: none;
-    min-height: 40em;
+    padding-left: 20px;
 }
 #editor:focus, #editor:hover  {
   outline:none;
