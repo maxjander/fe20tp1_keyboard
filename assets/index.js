@@ -31,14 +31,14 @@ function getNotes() {
      // returnerar alla notes som en array av obj
      let convertedData = JSON.parse(retriveddata)
      return convertedData
-} 
+}
 
 function saveNotes() {
           localStorage.setItem('Notes', JSON.stringify(notes))
 }
 
 function createNote (title, content) {
-     // 
+     //
      notes.push( {
           id: Date.now(),
           title,
@@ -66,17 +66,17 @@ function modifieNote(currentNote) {
      }
      return note
 }
-function findTheId(e){ 
+function findTheId(e){
      clickedId = e.target
-     
+
      getNotes().filter((note, index) => {
           if(note.id == clickedId.id)
           {
                clickedId.setAttribute('backgroundColor', '#ffffff')
                noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
                deleteBtn.setAttribute('value', index )
-               editor.setData(`<h1>${note.title}</h1> <br> ${note.content}`)
-               
+               editor.setData(`${note.content}`)   // Tog bort Title, pga blir dubbelt varje gång man sparar
+
           }
      })
 }
@@ -88,17 +88,21 @@ function saveBtnClicked(e){
 }
 
 function loadOnStart(){
-     
+
      if(getNotes()){
           notes = getNotes()
           notes.map( note => {
-               let title = document.createElement('h5')  
+              let timeDispl = moment(note.id).fromNow()
+              let title = document.createElement('h5')
+
                title.innerText = note.title
                title.setAttribute('id', note.id)
+               title.setAttribute('title', `Created: ${timeDispl}`)
+               console.log(timeDispl);
                leftDiv.appendChild(title)
-          })  
+          })
      }
-     
+
 }
 
 function printNote(id) {
@@ -116,18 +120,18 @@ function printNote(id) {
 }
 
 // function loadOnStart(){
-//      let myNotesObj 
+//      let myNotesObj
 //      if(myNotesObj = notes = getNotes()){
 //           // notes = getNotes()
 //           // let myNotesObj = getNotes()
 //           myNotesObj.map(note =>{
-//                let title = document.createElement('h5')  
+//                let title = document.createElement('h5')
 //                title.innerText = note.title
 //                title.setAttribute('id', note.id)
 //                leftDiv.appendChild(title)
-//           })  
+//           })
 //      }
-     
+
 // }
 
 
@@ -151,6 +155,6 @@ function printNote(id) {
 
 //           fullNoteLi.innerHTML = `<h2>${title}</h2> <p>${content}</p>`
 //           noteUl.appendChild(fullNoteLi)
-          
+
 //      })
 // }
