@@ -10,6 +10,9 @@ let noteContent = document.querySelector('#note-content')
 let noteUl = document.querySelector('#note-list')
 let allTitles = document.querySelector('#allTitles h2')
 let textArea = document.querySelector('#textArea')
+let noteLabel = document.querySelector('#note-label')
+let infoText = document.querySelector('#info-text')
+let textTemplates = document.querySelector('#text-templates')
 let OnloadWindow = window
 
 
@@ -24,6 +27,7 @@ OnloadWindow.addEventListener('load', loadOnStart )
 // Global Variables
 let notes = []
 let clickedId = null
+let clickedTemp
 // Functions
 function getNotes() {
      // laddar från localStorage
@@ -37,12 +41,17 @@ function saveNotes() {
           localStorage.setItem('Notes', JSON.stringify(notes))
 }
 
+<<<<<<< HEAD
 function createNote (title, content) {
      //
+=======
+function createNote (title, content,contentTemplate) {
+>>>>>>> Raulf
      notes.push( {
           id: Date.now(),
           title,
           content,
+          contentTemplate,
           dateModified: null,
           favorite: false,
      })
@@ -61,6 +70,7 @@ function modifieNote(currentNote) {
           id: currentNote.id,
           title: currentNote.title,
           content: currentNote.content,
+          contentTemplate: currentNote.contentTemplate,
           dateModified: Date.now(),
           favorite: currentNote.favorite,
      }
@@ -72,17 +82,45 @@ function findTheId(e){
      getNotes().filter((note, index) => {
           if(note.id == clickedId.id)
           {
+               textTemplates.remove()
+               infoText.remove()
                clickedId.setAttribute('backgroundColor', '#ffffff')
                noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
                deleteBtn.setAttribute('value', index )
+<<<<<<< HEAD
+               editor.setData(`${note.content}`)   // Tog bort Title, pga blir dubbelt varje gång man sparar
+
+=======
+               editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length-1])
+               editor.ui.view.editable.element.classList.add(note.contentTemplate)
+               let favoritIcon = document.createElement('span')
+               favoritIcon.innerHTML = ""
                editor.setData(`${note.content}`)   // Tog bort Title, pga blir dubbelt varje gång man sparar
 
           }
      })
 }
 
+function selectedTemp(){
+     const rbs = document.querySelectorAll('input[name="text-temp"]');
+     let selectedValue;
+
+     rbs.forEach(rb => {
+          if(rb.checked) {
+               selectedValue = rb.value;
+>>>>>>> Raulf
+          }
+     })
+     return selectedValue
+}
+
 function saveBtnClicked(e){
-     createNote(noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!', editorEl.innerHTML)
+     let selected = selectedTemp()
+     createNote(
+          noteTitle.value != ''?noteTitle.value : 'Ingen rubrik!',
+          editorEl.innerHTML, selected
+
+      )
      saveNotes()
      location.reload();
 }

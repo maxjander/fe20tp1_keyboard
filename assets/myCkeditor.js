@@ -1,5 +1,7 @@
 BalloonEditor
     .create( document.querySelector( '#editor' ), {
+        placeholder: 'Write here...'
+    }, {
       toolbar: {
            items: [  'heading', '|','bold', 'italic', '|', 'bulletedList', 'numberedList', ],
 
@@ -11,10 +13,10 @@ BalloonEditor
             ]
           }
        }
-    } )
-    .then( editor => {
-        window.editor = editor;
-    } )
-    .catch( error => {
-        console.error( error );
+        } )
+        .then( editor => {
+            window.editor = editor;        
+        } )
+        .catch( error => {
+            console.error( error );
     } );
