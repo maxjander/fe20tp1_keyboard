@@ -60,6 +60,8 @@ h6{
 }
 #editor {
     background-color:#ffffff;
+    border: none;
+    min-height: 40em;
 }
 
 
