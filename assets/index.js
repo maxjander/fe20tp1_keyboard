@@ -152,6 +152,27 @@ function printNote(id) {
      return `${id}`
 }
 
+//Insert Image and upload to localstorage
+
+document.querySelector("#imageInput").addEventListener("change", function(){
+     const reader = new FileReader();
+ 
+     reader.addEventListener("load", () => {
+           localStorage.setItem("recent-image", reader.result);
+     });
+ 
+     reader.readAsDataURL(this.files[0]);
+ });
+ 
+     document.addEventListener("DOMContentLoaded", () => {
+          const recentImageDataUrl = localStorage.getItem("recent-image");
+          
+      if (recentImageDataUrl) {
+           document.querySelector("#imgPreview").setAttribute("src", recentImageDataUrl);
+      }
+ 
+ }); 
+
 // function loadOnStart(){
 //      let myNotesObj
 //      if(myNotesObj = notes = getNotes()){

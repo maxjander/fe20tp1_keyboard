@@ -252,3 +252,8 @@ input[type="checkbox"] + .my-image {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 1rem;  
 } 
+
+#imgPreview {
+  width: 40%;
+  height: auto;
+}
