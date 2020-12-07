@@ -119,6 +119,37 @@ h6{
 }
 
 /* Right Div */
+  /* svg input #star:hover{
+  fill: #f1c915;
+}
+#star:checked{
+  fill: #f1c915;
+} */
+/* fill="#FFDF93" stroke="#C1C1C1" stroke-linecap="round" stroke-linejoin="round" */
+
+
+svg input:checked  {
+  fill:yellow;
+}
+
+
+
+input[type="checkbox"]:checked + .my-image {
+  fill:#f1c915;
+}
+
+input[type="checkbox"] + .my-image {
+  fill:#ffffff;
+  stroke:#C1C1C1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+#star {
+  display:none;
+}
+
+
+
 #right {
     text-align: center;
      margin: 0 auto;
@@ -144,6 +175,7 @@ h6{
   min-height: 80vh;
   
 }
+
 .ck-blurred{
   min-height: 80vh;
   

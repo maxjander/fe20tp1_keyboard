@@ -14,6 +14,8 @@ let noteLabel = document.querySelector('#note-label')
 let infoText = document.querySelector('#info-text')
 let textTemplates = document.querySelector('#text-templates')
 let OnloadWindow = window
+let favoritNote = document.querySelector('#favorit-note')
+let star = document.querySelector('#star')
 
 
 
@@ -41,12 +43,7 @@ function saveNotes() {
           localStorage.setItem('Notes', JSON.stringify(notes))
 }
 
-<<<<<<< HEAD
-function createNote (title, content) {
-     //
-=======
 function createNote (title, content,contentTemplate) {
->>>>>>> Raulf
      notes.push( {
           id: Date.now(),
           title,
@@ -76,6 +73,7 @@ function modifieNote(currentNote) {
      }
      return note
 }
+
 function findTheId(e){
      clickedId = e.target
 
@@ -87,28 +85,27 @@ function findTheId(e){
                clickedId.setAttribute('backgroundColor', '#ffffff')
                noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
                deleteBtn.setAttribute('value', index )
-<<<<<<< HEAD
-               editor.setData(`${note.content}`)   // Tog bort Title, pga blir dubbelt varje gång man sparar
-
-=======
+               saveBtn.remove()// Tar bort spara-knappen när man går in i noten.
                editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length-1])
                editor.ui.view.editable.element.classList.add(note.contentTemplate)
                let favoritIcon = document.createElement('span')
                favoritIcon.innerHTML = ""
                editor.setData(`${note.content}`)   // Tog bort Title, pga blir dubbelt varje gång man sparar
-
+               // return note
+          }
+          if (note.favorite === true) {
+               star.setAttribute('fill', '#FFDF93')
           }
      })
 }
 
 function selectedTemp(){
-     const rbs = document.querySelectorAll('input[name="text-temp"]');
-     let selectedValue;
+     const rbs = document.querySelectorAll('input[name="text-temp"]'); // rbs = radioButton'S
+     let selectedValue; //Selected radio btn
 
      rbs.forEach(rb => {
           if(rb.checked) {
                selectedValue = rb.value;
->>>>>>> Raulf
           }
      })
      return selectedValue
@@ -132,11 +129,9 @@ function loadOnStart(){
           notes.map( note => {
               let timeDispl = moment(note.id).fromNow()
               let title = document.createElement('h5')
-
                title.innerText = note.title
                title.setAttribute('id', note.id)
                title.setAttribute('title', `Created: ${timeDispl}`)
-               console.log(timeDispl);
                leftDiv.appendChild(title)
           })
      }
@@ -144,7 +139,7 @@ function loadOnStart(){
 }
 
 function printNote(id) {
-     id = clickedId
+     id = clickedId // ????
      let = printEl = document.createElement('div')
      printEl.setAttribute('id', 'printMe')
 
