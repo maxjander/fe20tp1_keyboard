@@ -14,6 +14,8 @@ let noteLabel = document.querySelector('#note-label')
 let infoText = document.querySelector('#info-text')
 let textTemplates = document.querySelector('#text-templates')
 let OnloadWindow = window
+let favoritNote = document.querySelector('#favorit-note')
+let star = document.querySelector('#star')
 
 
 
@@ -71,6 +73,7 @@ function modifieNote(currentNote) {
      }
      return note
 }
+
 function findTheId(e){
      clickedId = e.target
 
@@ -89,6 +92,9 @@ function findTheId(e){
                favoritIcon.innerHTML = ""
                editor.setData(`${note.content}`)   // Tog bort Title, pga blir dubbelt varje gång man sparar
                // return note
+          }
+          if (note.favorite === true) {
+               star.setAttribute('fill', '#FFB300')
           }
      })
 }
