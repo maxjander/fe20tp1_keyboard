@@ -8,7 +8,8 @@ let editorEl = document.querySelector('#editor') // The editor
 let showAllNotes = document.querySelector('#showAllNotes') // The editor
 let noteContent = document.querySelector('#note-content')
 let noteUl = document.querySelector('#note-list')
-let allTitles = document.querySelector('#allTitles h2')
+let allTitles = document.querySelector('.allTitles h5')
+let titlesList = document.querySelector('.allTitles')
 let textArea = document.querySelector('#textArea')
 let noteLabel = document.querySelector('#note-label')
 let infoText = document.querySelector('#info-text')
@@ -16,7 +17,10 @@ let textTemplates = document.querySelector('#text-templates')
 let OnloadWindow = window
 let favoritNote = document.querySelector('#favorit-note')
 let star = document.querySelector('#star')
-
+let starIcon = document.querySelector('#staritow')
+let searchBar = document.querySelector('#searchbar')
+let statistics = document.querySelector('[data-tooltip="Statistics"]')
+let leftDivTitle = document.querySelector('#left h1')
 
 
 // Event listeners
@@ -25,12 +29,105 @@ saveBtn.addEventListener('click', saveBtnClicked)
 deleteBtn.addEventListener('click', deleteNote)
 leftDiv.addEventListener('click', findTheId) // Find the id of the title you click on
 OnloadWindow.addEventListener('load', loadOnStart )
+searchBar.addEventListener('input', searchNote)
+statistics.addEventListener('click', trackInfo)
+starIcon.addEventListener('click', addToFavorite)
 
 // Global Variables
 let notes = []
 let clickedId = null
-let clickedTemp
-// Functions
+let tempNote = null
+// Functions'
+
+function addToFavorite(e) {
+          console.log(star)
+          // ?star.setAttribute('checked',null):star.setAttribute(null)
+          // star.toggleAttribute('checked','')
+          star.setAttribute('checked','')
+          star.getAttribute('checked') ? console.log('test')  :  star.setAttribute('checked', '')
+          console.log(star)
+          
+          // console.log(star)
+}
+
+// function showFavorite(FavStatus){
+// // notes.push(notes.find(note => note.includes(noteId)).splice(note.length-1, 0 , note.visited += 1))
+// notes.filter(note => note.id === noteId).find(note => {
+//      note.visited +=1
+//      console.log(`${note.title}: Visited ${note.visited} times! `)
+//       tempNote = note
+// })
+// saveNotes()
+// // .splice(noteId.length - 1, 1, tempNote)
+// }
+
+
+
+
+
+function trackInfo(e){
+     e.preventDefault()
+
+     notes = getNotes()
+     leftDivTitle.innerText = "Note Statistics";
+     titlesList.innerHTML = ''
+     
+     
+     notes.forEach(note => {
+               let timeDispl = moment(note.id).fromNow()
+              let title = document.createElement('h5')
+               title.innerText = `${note.title}: Visited ${note.visited} times! `
+               title.setAttribute('id', note.id)
+               title.setAttribute('title', `Created: ${timeDispl}`)
+               titlesList.appendChild(title)
+     })
+     
+     
+     
+          // note, note, note => allTitles
+               // note.title + "Has been visited ${besökt}"
+               
+
+
+
+
+}
+
+function tracker(noteId){
+// notes.push(notes.find(note => note.includes(noteId)).splice(note.length-1, 0 , note.visited += 1))
+notes.filter(note => note.id === noteId).find(note => {
+     note.visited +=1
+     console.log('Title: ' + note.title+ ' Visited times: '+note.visited)
+      tempNote = note
+})
+saveNotes()
+// .splice(noteId.length - 1, 1, tempNote)
+}
+
+function searchNote(e) {
+     let searchInput = e.target.value
+     if(getNotes()){
+          notes = getNotes()
+          notes.filter(note => {
+               if(note.title.toUpperCase().includes(searchInput.toUpperCase())){
+                    titlesList.innerHTML = ''
+                    return note
+               }
+          }).map( note => {
+               
+              let timeDispl = moment(note.id).fromNow()
+              let title = document.createElement('h5')
+
+               statistics ? title.innerText = note.title + " Times visited: " + note.visited : title.innerText = note.title
+               title.setAttribute('id', note.id)
+               title.setAttribute('title', `Created: ${timeDispl}`)
+               titlesList.appendChild(title)
+
+          })
+     }
+}
+
+
 function getNotes() {
      // laddar från localStorage
      let retriveddata = localStorage.getItem('Notes')
@@ -51,6 +148,7 @@ function createNote (title, content,contentTemplate) {
           contentTemplate,
           dateModified: null,
           favorite: false,
+          visited: 0
      })
      saveNotes()
 }
@@ -80,6 +178,7 @@ function findTheId(e){
      getNotes().filter((note, index) => {
           if(note.id == clickedId.id)
           {
+               tracker(note.id, index)
                textTemplates.remove()
                infoText.remove()
                clickedId.setAttribute('backgroundColor', '#ffffff')
@@ -132,7 +231,7 @@ function loadOnStart(){
                title.innerText = note.title
                title.setAttribute('id', note.id)
                title.setAttribute('title', `Created: ${timeDispl}`)
-               leftDiv.appendChild(title)
+               titlesList.appendChild(title)
           })
      }
 
