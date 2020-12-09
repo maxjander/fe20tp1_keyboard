@@ -131,7 +131,12 @@ h6{
 svg input:checked  {
   fill:yellow;
 }
-
+.yellowStar  {
+  fill:yellow;
+  stroke:#C1C1C1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
 
 
 input[type="checkbox"]:checked + .my-image {
