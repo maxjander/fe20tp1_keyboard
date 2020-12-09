@@ -37,17 +37,13 @@ starIcon.addEventListener('click', addToFavorite)
 let notes = []
 let clickedId = null
 let tempNote = null
+star.checked = false
+
 // Functions'
 
-function addToFavorite(e) {
-          console.log(star)
-          // ?star.setAttribute('checked',null):star.setAttribute(null)
-          // star.toggleAttribute('checked','')
-          star.setAttribute('checked','')
-          star.getAttribute('checked') ? console.log('test')  :  star.setAttribute('checked', '')
-          console.log(star)
-          
-          // console.log(star)
+function addToFavorite() {
+          star.checked = !star.checked
+          console.log(star.checked)
 }
 
 // function showFavorite(FavStatus){
@@ -147,7 +143,7 @@ function createNote (title, content,contentTemplate) {
           content,
           contentTemplate,
           dateModified: null,
-          favorite: false,
+          favorite:false ,
           visited: 0
      })
      saveNotes()
