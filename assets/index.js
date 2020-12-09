@@ -55,7 +55,7 @@ function renderFavorite(){
           notes.filter(note => {
                if(note.favorite === true){
                     let timeDispl = moment(note.id).fromNow()
-                    let title = document.createElement('span')
+                    let title = document.createElement('h5')
                     title.innerHTML = `${note.title} ${starIconImg}`
                     title.setAttribute('id', note.id)
                     title.setAttribute('title', `Created: ${timeDispl}`)
