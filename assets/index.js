@@ -37,33 +37,14 @@ starIcon.addEventListener('click', addToFavorite)
 let notes = []
 let clickedId = null
 let tempNote = null
+let currentFavIcon
 // Functions'
 
-function addToFavorite(e) {
-          console.log(star)
-          // ?star.setAttribute('checked',null):star.setAttribute(null)
-          // star.toggleAttribute('checked','')
-          star.setAttribute('checked','')
-          star.getAttribute('checked') ? console.log('test')  :  star.setAttribute('checked', '')
-          console.log(star)
-          
-          // console.log(star)
+function addToFavorite() {
+          let currentFavIcon = result =(star.checked = !star.checked )
+          console.log(currentFavIcon)
+          return      currentFavIcon    
 }
-
-// function showFavorite(FavStatus){
-// // notes.push(notes.find(note => note.includes(noteId)).splice(note.length-1, 0 , note.visited += 1))
-// notes.filter(note => note.id === noteId).find(note => {
-//      note.visited +=1
-//      console.log(`${note.title}: Visited ${note.visited} times! `)
-//       tempNote = note
-// })
-// saveNotes()
-// // .splice(noteId.length - 1, 1, tempNote)
-// }
-
-
-
-
 
 function trackInfo(e){
      e.preventDefault()
@@ -81,16 +62,6 @@ function trackInfo(e){
                title.setAttribute('title', `Created: ${timeDispl}`)
                titlesList.appendChild(title)
      })
-     
-     
-     
-          // note, note, note => allTitles
-               // note.title + "Has been visited ${besökt}"
-               
-
-
-
-
 }
 
 function tracker(noteId){
