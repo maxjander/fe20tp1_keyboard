@@ -52,12 +52,14 @@ function renderFavorite(){
           notes.filter(note => {
                if(note.favorite === true){
                     let timeDispl = moment(note.id).fromNow()
-                    let title = document.createElement('span')
+                    let title = document.createElement('h5')
                     title.innerHTML = `${note.title} ${starIconImg}`
                     title.setAttribute('id', note.id)
+                    title.setAttribute('active','')
                     title.setAttribute('title', `Created: ${timeDispl}`)
                     titlesList.appendChild(title)
                }
+
           })
      }
 }
@@ -69,7 +71,7 @@ function loadOnStart(){
           notes.map( note => {
               let timeDispl = moment(note.id).fromNow()
               let title = document.createElement('h5')
-               title.innerText = note.title
+               title.innerHTML = `${note.title} ${note.favorite === true?starIconImg: ''}`
                title.setAttribute('id', note.id)
                title.setAttribute('title', `Created: ${timeDispl}`)
                titlesList.appendChild(title)
@@ -100,14 +102,12 @@ function trackInfo(e){
 }
 
 function tracker(noteId){
-// notes.push(notes.find(note => note.includes(noteId)).splice(note.length-1, 0 , note.visited += 1))
 notes.filter(note => note.id === noteId).find(note => {
      note.visited +=1
      console.log('Title: ' + note.title+ ' Visited times: '+note.visited)
       tempNote = note
-})
+     })
 saveNotes()
-// .splice(noteId.length - 1, 1, tempNote)
 }
 
 function searchNote(e) {
@@ -120,11 +120,22 @@ function searchNote(e) {
                     return note
                }
           }).map( note => {
-               
+               //  title.innerHTML = `${note.title} ${starIconImg}`
               let timeDispl = moment(note.id).fromNow()
               let title = document.createElement('h5')
 
-               statisticsNav ? title.innerText = note.title + " Times visited: " + note.visited : title.innerText = note.title
+               leftDivTitle.innerText === 'Note Statistics' ? 
+               title.innerText = `${note.title} Times visited: ${note.visited}` :
+
+               leftDivTitle.innerText === 'Favorite notes'?
+               title.innerHTML = `${note.title} ${starIconImg}`:
+               
+               leftDivTitle.innerText === 'Saved Notes!' && note.favorite === true?
+               title.innerHTML = `${note.title} ${starIconImg}`:
+               title.innerHTML = `${note.title}`
+
+               
+               
                title.setAttribute('id', note.id)
                title.setAttribute('title', `Created: ${timeDispl}`)
                titlesList.appendChild(title)
