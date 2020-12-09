@@ -64,6 +64,7 @@
      <main>
           <div id="left">
                <h1>Saved Notes!</h1>
+               <input id="searchbar" placeholder="Search...." type="text" />
                <div class="allTitles"></div>
           </div>
           <div id='right' class="subPage">
@@ -84,10 +85,12 @@
                     <label>Warring Style</label>
                     <input type="radio" id="template4" name="text-temp" value="temp4">
                </div>
-               <input id ="star" type="checkbox" name="" value="" />
+
+               <input id="star" type="checkbox" />
+
                <svg class="my-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     preserveAspectRatio="xMidYMid" width="17" height="16" viewBox="0 0 17 16">
-                    <path
+                    <path id="staritow"
                          d="M9 1L11.2857 6.71429H17L12.4286 10.7143L14.1429 17L9 13L3.85714 17L5.57143 10.7143L1 6.71429H6.71429L9 1Z" />
                </svg>
                <div id="editor" class="">
@@ -96,9 +99,6 @@
                     <button id="save-btn">Save</button>
                     <button id="delete-btn">Delete</button>
                </div>
-
-
-
 
           </div>
           <div id="info"></div>
