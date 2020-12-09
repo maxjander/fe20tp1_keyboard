@@ -88,14 +88,11 @@ function loadOnStart(){
 
 function trackInfo(e){
      e.preventDefault()
-
      notes = getNotes()
      leftDivTitle.innerText = "Note Statistics";
      titlesList.innerHTML = ''
-     
-     
      notes.forEach(note => {
-               let timeDispl = moment(note.id).fromNow()
+              let timeDispl = moment(note.id).fromNow()
               let title = document.createElement('h5')
                title.innerText = `${note.title}: Visited ${note.visited} times! `
                title.setAttribute('id', note.id)
@@ -123,21 +120,23 @@ function searchNote(e) {
                     return note
                }
           }).map( note => {
-               //  title.innerHTML = `${note.title} ${starIconImg}`
+               
               let timeDispl = moment(note.id).fromNow()
               let title = document.createElement('h5')
-
+               
+               // If 'Note Statistics' is clicked from navbar then run this
                leftDivTitle.innerText === 'Note Statistics' ? 
                title.innerText = `${note.title} Times visited: ${note.visited}` :
 
+               // If 'Favorite notes' is clicked from navbar then run this
                leftDivTitle.innerText === 'Favorite notes'?
                title.innerHTML = `${note.title} ${starIconImg}`:
-               
+
+               // If 'Saved Notes!' is clicked from navbar then run this
                leftDivTitle.innerText === 'Saved Notes!' && note.favorite === true?
                title.innerHTML = `${note.title} ${starIconImg}`:
                title.innerHTML = `${note.title}`
 
-               
                
                title.setAttribute('id', note.id)
                title.setAttribute('title', `Created: ${timeDispl}`)
