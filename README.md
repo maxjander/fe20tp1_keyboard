@@ -5,9 +5,8 @@
 
 # Table of Contents
 
-[KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "Our kanban board")
-
-[Team Members]("team-members")
+* [KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "Our kanban board")
+* [Team Members]("team-members")
 
 
 # <a name="team-members"></a> Team Members:
