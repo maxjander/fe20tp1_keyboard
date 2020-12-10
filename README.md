@@ -11,7 +11,6 @@ Inspirationen till Quire kommer från bland annat Evernote och OneNote men har e
 * [KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "Our kanban board")
 * [Team Members](#team-members)
 * [Funktionalitet](#Funktionalitet)
-* [Avstämningar](#avst)
 * [Project Demo](#demo)
 
 # <a name="team-members"></a> Team Members:
@@ -35,13 +34,6 @@ Responsiv - appen ska fungera helt och hållet på alla storlekar av skärm
 HTML5 och CSS3
 Inga “stora” JS-ramverk/bibliotek får förekomma, ex. JQuery, React, Angular etc.
 Semantisk HTML - grundläggande tillgänglighetsanpassning
-
-
-# <a name="avst"></a> Avstämningar med Tobias
-
-1. 26/11 kl 15.00
-2. 3/12 kl 09.30
-3. 10/12 kl 15.30
 
 # <a name="demo"></a> Project demo
 * [Demo site](http://fe20tp_keyboard.surge.sh/ "Surge Demo of Quire")
