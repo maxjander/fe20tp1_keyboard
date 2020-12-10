@@ -3,14 +3,18 @@
 # Quire
 > A note taking app for easy notes.
 
-[KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "our kanban board")
+# Table of Contents
 
-### Scrum-master:
-Sprint 1: Nisse Lindqvist  
-Sprint 2: Fadil Al Farghan  
-sprint 3: Raulf Haidari  
-Sprint 4: Max Jander  
-Sprint 5: Youssef Chardi  
+[KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "Our kanban board")
+[Team Members]("team-members")
+
+
+# <a name="team-members"></a> Team Members:
+Nisse Lindqvist  
+Fadil Al Farghan  
+Raulf Haidari  
+Max Jander  
+Youssef Chardi  
 
 
 ### Om produkten
