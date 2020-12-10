@@ -11,7 +11,7 @@ Inspirationen till Quire kommer från bland annat Evernote och OneNote men har e
 * [KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "Our kanban board")
 * [Team Members](#team-members)
 * [Funktionalitet](#Funktionalitet)
-
+* [Avstämningar](#avst)
 
 # <a name="team-members"></a> Team Members:
 Nisse Lindqvist  
@@ -20,7 +20,7 @@ Raulf Haidari
 Max Jander  
 Youssef Chardi  
 
-### <a name="Funktionalitet"></a> Funktionalitet
+# <a name="Funktionalitet"></a> Funktionalitet
 Följande grundläggande funktioner måste finnas med i beta-versionen:
 Användaren ska kunna skapa flera olika anteckningar i sin anteckningsbok
 Användaren ska i varje anteckning kunna skriva så mycket text som hen önskar samt kunna formatera denna med enklare formatering såsom rubriker, punktlistor fetstil osv.
@@ -36,7 +36,7 @@ Inga “stora” JS-ramverk/bibliotek får förekomma, ex. JQuery, React, Angula
 Semantisk HTML - grundläggande tillgänglighetsanpassning
 
 
-### Avstämningar med Tobias
+# <a name="avst"></a> Avstämningar med Tobias
 
 1. 26/11 kl 15.00
 2. 3/12 kl 09.30
