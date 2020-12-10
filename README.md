@@ -1,10 +1,9 @@
-#### fe20tp1_keyboard
+###### fe20tp1_keyboard
 
 # Quire
 > A note taking app for easy notes.
 
-KanBan
-https://github.com/maxjander/fe20tp1_keyboard/projects/1
+![KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1)
 
 ### Scrum-master:
 Sprint 1: Nisse Lindqvist  
