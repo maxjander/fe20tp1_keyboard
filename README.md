@@ -1,23 +1,10 @@
-# fe20tp1_keyboard
-## Team Projekt 1 __Keyboard__ GitHub repo
+#### fe20tp1_keyboard
 
-## KanBan
+# Quire
+> A note taking app for easy notes.
+
+KanBan
 https://github.com/maxjander/fe20tp1_keyboard/projects/1
-
-### Sprint 1:
-Sätta upp struktur för huvudmodul
-
-- Som användare vill jag mötas av en informationssida som berättar om systemet första gången jag besöker Quire
-- Som användare vill jag kunna skapa en anteckning så att jag kan skriva ner det jag behöver spara
-
-### Sprint 2
-
-### Sprint 3
-
-### Spring 4
-
-### Sprint 5
-
 
 ### Scrum-master:
 Sprint 1: Nisse Lindqvist  
