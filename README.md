@@ -1,12 +1,15 @@
 ###### fe20tp1_keyboard
 
 # Quire
-> A note taking app for easy notes.
+> Quire - notebook in the browser är en ny tjänst som är tänkt att lanseras 2020. Tjänsten kommer utvecklas i flera olika steg och ert uppdrag är att ta fram den första beta-versionen av tjänsten.
+Koncept
+Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.
+Inspirationen till Quire kommer från bland annat Evernote och OneNote men har en lite modernare tolkning av tekniken och användargränssnittet.
 
 # Table of Contents
 
 * [KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "Our kanban board")
-* [Team Members]("team-members")
+* [Team Members]("#team-members")
 
 
 # <a name="team-members"></a> Team Members:
@@ -17,12 +20,7 @@ Max Jander
 Youssef Chardi  
 
 
-### Om produkten
-Quire - notebook in the browser är en ny tjänst som är tänkt att lanseras 2020. Tjänsten kommer utvecklas i flera olika steg och ert uppdrag är att ta fram den första beta-versionen av tjänsten.
-Koncept
-Quire är en multifunktionell anteckningsbok som fungerar direkt i webbläsaren. Den första versionen av tjänsten sparar alla anteckningar lokalt i datorn/webbläsaren och har alltså ingen server eller backend.
-Inspirationen till Quire kommer från bland annat Evernote och OneNote men har en lite modernare tolkning av tekniken och användargränssnittet.
-Nedan syns en konceptskiss på hur systemet i grova drag ska se ut.
+
 
 
 ### Funktionalitet
