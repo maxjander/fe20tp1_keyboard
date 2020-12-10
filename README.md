@@ -14,11 +14,11 @@ Inspirationen till Quire kommer från bland annat Evernote och OneNote men har e
 * [Avstämningar](#avst)
 
 # <a name="team-members"></a> Team Members:
-Nisse Lindqvist  
-Fadil Al Farghan  
-Raulf Haidari  
-Max Jander  
-Youssef Chardi  
+* [Nisse Lindqvist]("https://github.com/kavorca92")
+* [Fadil Al Farghan]("https://github.com/FaaDiiL")
+* [Raulf Haidari]("https://github.com/Raulf02")
+* [Max Jander]("https://github.com/maxjander")
+* [Youssef Chardi]("https://github.com/Youssef-C")
 
 # <a name="Funktionalitet"></a> Funktionalitet
 Följande grundläggande funktioner måste finnas med i beta-versionen:
