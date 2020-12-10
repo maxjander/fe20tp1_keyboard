@@ -12,6 +12,7 @@ Inspirationen till Quire kommer från bland annat Evernote och OneNote men har e
 * [Team Members](#team-members)
 * [Funktionalitet](#Funktionalitet)
 * [Avstämningar](#avst)
+* [Project Demo](#demo)
 
 # <a name="team-members"></a> Team Members:
 * [Nisse Lindqvist](https://github.com/kavorca92)
@@ -41,3 +42,6 @@ Semantisk HTML - grundläggande tillgänglighetsanpassning
 1. 26/11 kl 15.00
 2. 3/12 kl 09.30
 3. 10/12 kl 15.30
+
+# <a name="demo"></a> Project demo
+* [Demo site](http://fe20tp_keyboard.surge.sh/ "Surge Demo of Quire")
