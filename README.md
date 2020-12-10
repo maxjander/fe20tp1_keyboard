@@ -3,7 +3,7 @@
 # Quire
 > A note taking app for easy notes.
 
-![KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1)
+[KanBan](https://github.com/maxjander/fe20tp1_keyboard/projects/1 "our kanban board")
 
 ### Scrum-master:
 Sprint 1: Nisse Lindqvist  
