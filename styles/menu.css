@@ -22,7 +22,7 @@ html {
     transition: background 0.3s;
 }
 
-.menu__item > i {
+.menu__item > li {
     font-size: 2.2em;
 
 }
