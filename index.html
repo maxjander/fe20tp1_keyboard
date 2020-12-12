@@ -42,7 +42,7 @@
 <body>
     <nav class="menu">
         <ul class="nav-list">
-            <li href="./" class="menu__item menu__item--active" data-tooltip="Home">
+            <li href="./" class="menu__item menu__item--active" data-tooltip="Home" value="Home">
                 <i class="material-icons"><svg width="54" height="66" viewBox="0 0 54 66" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -51,14 +51,14 @@
                     </svg>
                 </i>
             </li>
-            <li href="#" class="menu__item" data-tooltip="Search" value="search">
-                <i class="material-icons" value="search">search</i>
+            <li href="#" class="menu__item" data-tooltip="Search" value="Search notes...">
+                <i class="material-icons" value="Search notes...">search</i>
             </li>
-            <li href="#" class="menu__item" data-tooltip="Favorites" value="Favorites">
-                <i class="material-icons" value="Favorites">stars</i>
+            <li href="#" class="menu__item" data-tooltip="Favorites" value="Favorites: Search ...">
+                <i class="material-icons" value="Favorites: Search ...">stars</i>
             </li>
-            <li href="#" class="menu__item" data-tooltip="Statistics" value="Statistics">
-                <i class="material-icons" value="Statistics">analytics</i>
+            <li href="#" class="menu__item" data-tooltip="Statistics" value="Statistics: Search ...">
+                <i class="material-icons" value="Statistics: Search ...">analytics</i>
             </li>
             <!-- <li href="./" class="menu__item" data-tooltip="Settings" value="search">
                         <i class="material-icons" value="search">settings</i>
@@ -71,25 +71,23 @@
     </nav>
     <main>
         <div id="left">
-            <h1>Saved Notes!</h1>
-            <input id="searchbar" placeholder="Search...." type="text" />
+            <input id="searchbar" placeholder="Search saved notes.." type="text" />
             <div class="allTitles"></div>
         </div>
         <div id='right' class="subPage">
-            <div id="info-text">
-                <h1>Welcome to Quire</h1>
-            </div>
+
             <input type="text" id="note-title" placeholder="Title">
             <div id="text-templates">
-                <br> Choose Text Templates:
+                <br>
+                <h4 id="templateTitle"> Choose Text Templates: </h4>
                 <br>
                 <label>Green Style</label>
                 <input type="radio" id="template1" name="text-temp" value="temp1">
-                <label>Prurple Style</label>
+                <label>Purple Style</label>
                 <input type="radio" id="template2" name="text-temp" value="temp2">
-                <label>Normal Style</label>
+                <label>Black Style</label>
                 <input type="radio" id="template3" name="text-temp" value="temp3">
-                <label>Warring Style</label>
+                <label>Warning Style</label>
                 <input type="radio" id="template4" name="text-temp" value="temp4">
             </div>
 
@@ -107,9 +105,25 @@
                 <button id="delete-btn">Delete</button>
                 <button id="update-btn">Update</button>
             </div>
-
+            <div class="msg">
+                <!--    <div class="flexContainer" id="container">
+                    <div class="containerItems">
+                        <h2 id="welcome">Let's take some notes!</h2>
+                        <p class="instructions" id="instructionsTitle">
+                            Thanks for choosing to use Quire! <br> Here's some basic information to get you started:</p>
+                        <ul class="instructions" id="instructionsList">
+                            <li>To make a new note press the "+" symbol in the menu on the left</li>
+                            <li> To search through your notes press the looking glass on the left menu</li>
+                        </ul>
+                    </div>
+                    <button id="exit" onclick="closeInfo()">Let's get started!</button>
+                </div>
+                <div id="overlay"></div>
+                <div id="info"></div>-->
+            </div>
         </div>
-        <div id="info"></div>
+
+
     </main>
 </body>
 

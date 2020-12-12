@@ -16,7 +16,7 @@ BalloonEditor
         } )
         .then( editor => {
             window.editor = editor;
-                 get  
+                   
         } )
         .catch( error => {
             console.error( error );

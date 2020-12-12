@@ -14,7 +14,7 @@ let allTitles = document.querySelector('.allTitles h5')
 let titlesList = document.querySelector('.allTitles')
 let textArea = document.querySelector('#textArea')
 let noteLabel = document.querySelector('#note-label')
-let infoText = document.querySelector('#info-text')
+// let infoText = document.querySelector('#info-text')
 
 let textTemplates = document.querySelector('#text-templates')
 let demoHolderEl = document.querySelector('#demo-holder')
@@ -32,7 +32,7 @@ let favoritesNav = document.querySelector('[data-tooltip="Favorites"]')
 let statisticsNav = document.querySelector('[data-tooltip="Statistics"]')
 let settingsNav = document.querySelector('[data-tooltip="Settings"]')
 let addNoteNav = document.querySelector('[data-tooltip="add"]')
-let leftDivTitle = document.querySelector('#left h1')
+let leftDivTitle = document.querySelector('#left input')
 let rbs = document.querySelectorAll('input[name="text-temp"]')
     // Event listeners
 editorEl.addEventListener('click', e => e.target)
@@ -51,11 +51,28 @@ textTemplates.addEventListener('click', addExempleTemplate)
 
 // Global Variables
 let notes = []
+let isFirstTime = false
 let clickedId = null
 let clickedNavElement = null
 let tmpTemplate = null
 let tempNote = null
 let currentFavIcon = false
+let infoMsg = `<div class="msg">
+                <div class="flexContainer" id="container">
+                    <div class="containerItems">
+                        <h2 id="welcome">Let's take some notes!</h2>
+                        <p class="instructions" id="instructionsTitle">
+                            Thanks for choosing to use Quire! <br> Here's some basic information to get you started:</p>
+                        <ul class="instructions" id="instructionsList">
+                            <li>To make a new note press the "+" symbol in the menu on the left</li>
+                            <li> To search through your notes press the looking glass on the left menu</li>
+                        </ul>
+                    </div>
+                    <button id="exit" ">Let's get started!</button>
+                </div>
+                <div id="overlay"></div>
+                <div id="info"></div>
+            </div>`
 let starIconImg = `<svg class="yellowStar" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     preserveAspectRatio="xMidYMid" width="17" height="16" viewBox="0 0 17 16">
                     <path id="staritow"
@@ -63,6 +80,16 @@ let starIconImg = `<svg class="yellowStar" xmlns="http://www.w3.org/2000/svg" xm
                </svg>`
     // let activeNav
     // Functions'
+
+    function welcomeMessage() {
+        
+        if(localStorage.getItem('firstTimeVisiting') < 1) {
+            let infoMsgHolder = document.querySelector('.msg')
+            infoMsgHolder.innerHTML = infoMsg
+            localStorage.setItem('firstTimeVisiting', false)
+            document.querySelector('.msg button').addEventListener('click', closeInfo)
+        }
+    }
 
     function modifieNote() {
     let noteIndex = findeNoteIndex()
@@ -116,7 +143,7 @@ function renderClickedNote(e) {
         if (note.id == clickedId) {
             tracker(clickedId, index)
             textTemplates.remove()
-            infoText.remove()
+            // infoText.remove()
             noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
             deleteBtn.setAttribute('value', index)
             updateBtn.setAttribute('value', index) 
@@ -157,6 +184,7 @@ function renderTitle(e) {
             if (note.favorite === true) {
                 let timeDispl = moment(note.id).fromNow()
                 let title = document.createElement('h5')
+                
                 title.innerHTML = `${note.title} ${starIconImg}`
                 title.setAttribute('id', note.id)
                 title.setAttribute('active', '')
@@ -170,7 +198,7 @@ function renderTitle(e) {
 }
 
 function loadOnStart() {
-
+    welcomeMessage()
     if (getNotes()) {
         notes = getNotes()
         notes.map(note => {
@@ -185,56 +213,14 @@ function loadOnStart() {
 
 }
 
-
+// Spara ner menyns li-value för att ändra searchbarens placeholder text.
 function activeNavEl(e) {
     e.preventDefault()
     clickedNavElement = e.target.getAttribute("value")
-    notes = getNotes()
-    leftDivTitle.innerText = clickedNavElement;
-    titlesList.innerHTML = ''
-    notes.forEach(note => {
-        let timeDispl = moment(note.id).fromNow()
-        let title = document.createElement('h5')
-
-
-        switch (clickedNavElement) {
-            case 'Search':
-                title.innerText = note.favorit = true ? note.title + starIconImg : note.title
-                break;
-            case 'Favorite notes':
-                title.innerHTML = `${note.title} ${starIconImg}`
-                break;
-
-            case 'Favorite notes':
-                title.innerHTML = `${note.title} ${starIconImg}`
-                break;
-
-            default:
-                console.log('zigg!')
-                break;
-        }
-
-        // If 'Note Statistics' is clicked from navbar then run this
-
-        // If 'Favorite notes' is clicked from navbar then run this
-        // leftDivTitle.innerText === '' && note.favorite === true ?
-
-
-        // If 'Saved Notes!' is clicked from navbar then run this
-        // leftDivTitle.innerText === 'Saved Notes!' && note.favorite === true?
-        // title.innerHTML = `${note.title} ${starIconImg}`:
-        // title.innerHTML = `${note.title}`
-
-
-
-
-        title.setAttribute('id', note.id)
-        title.setAttribute('title', `Created: ${timeDispl}`)
-        titlesList.appendChild(title)
-    })
-
+    leftDivTitle.setAttribute('placeholder', clickedNavElement);
 }
 
+// Sätter statestik på notes:en
 function tracker(noteId) {
     notes.filter(note => note.id === noteId).find(note => {
         note.visited += 1
@@ -245,6 +231,7 @@ function tracker(noteId) {
 
 function searchNote(e) {
     let searchInput = e.target.value
+    
     if (getNotes()) {
         notes = getNotes()
         notes.filter(note => {
@@ -252,34 +239,40 @@ function searchNote(e) {
                 titlesList.innerHTML = ''
                 return note
             }
-        }).map(note => {
+            }).map(note => {
 
-            let timeDispl = moment(note.id).fromNow()
-            let title = document.createElement('h5')
-
-            // If 'Note Statistics' is clicked from navbar then run this
-            leftDivTitle.innerText === 'Note Statistics' ?
-                title.innerText = `${note.title} visited: ${note.visited} times.` :
-
-                // If 'Favorite notes' is clicked from navbar then run this
-                leftDivTitle.innerText === 'Favorite notes' ?
-                title.innerHTML = `${note.title} ${starIconImg}` :
-
-                // If 'Saved Notes!' is clicked from navbar then run this
-                leftDivTitle.innerText === 'Saved Notes!' && note.favorite === true ?
-                title.innerHTML = `${note.title} ${starIconImg}` :
-                title.innerHTML = `${note.title}`
+           
+                let timeDispl = moment(note.id).fromNow()
+                let title = document.createElement('h5')
 
 
-            title.setAttribute('id', note.id)
-            title.setAttribute('title', `Created: ${timeDispl}`)
-            titlesList.appendChild(title)
+                switch (clickedNavElement.toUpperCase()) {
+                    case 'Search notes...'.toLocaleUpperCase():
+                        title.innerHTML = note.favorit = true ? note.title + starIconImg : note.title
+                        break;
+                    case 'Favorites: Search ...'.toLocaleUpperCase():
+                        title.innerHTML = `${note.title} ${starIconImg}`
+                        break;
+
+                    case 'Statistics: Search ...'.toLocaleUpperCase():
+                        title.innerHTML = `${note.title} visited: ${note.visited} times.` 
+                        break;
+
+                    default:
+                        console.log('Nothing!')
+                        break;
+                }
+
+                title.setAttribute('id', note.id)
+                title.setAttribute('title', `Created: ${timeDispl}`)
+                titlesList.appendChild(title)
+           
 
         })
     }
 }
 
-
+// Hämtar hem arrayen med alla objekt som vi har sparat i LocalStorage
 function getNotes() {
     // laddar från localStorage
     let retriveddata = localStorage.getItem('Notes')
@@ -288,6 +281,7 @@ function getNotes() {
     return convertedData
 }
 
+// Vår locala array till localStorage
 function saveNotes() {
     localStorage.setItem('Notes', JSON.stringify(notes))
 }
@@ -317,7 +311,7 @@ function createNote(title, content, contentTemplate) {
 
 
 
-
+// För att ändra typsnitt
 function selectedTemp() {
     rbs = document.querySelectorAll('input[name="text-temp"]'); // rbs = radioButton'S
     let selectedValue; //Selected radio btn
@@ -330,6 +324,7 @@ function selectedTemp() {
     return selectedValue
 }
 
+// När save
 function saveBtnClicked(e) {
     let selected = selectedTemp()
     createNote(
@@ -359,4 +354,22 @@ function printNote(id) {
 
 function addToFavorite() {
     currentFavIcon = star.checked = !star.checked
+}
+
+// Close the information message box.
+function closeInfo() {
+    document.querySelector('.msg').innerHTML = ''
+    createNote('Information Note', infoMsg, 'temp1')
+    // notes.push({
+    //     id: Date.now(),
+    //     title:'Information Note',
+    //     content: infoMsg,
+    //     contentTemplate: 'temp1',
+    //     dateModified: null,
+    //     favorite: currentFavIcon,
+    //     visited: 0
+    // })
+
+    // saveNotes()
+    location.reload()
 }
