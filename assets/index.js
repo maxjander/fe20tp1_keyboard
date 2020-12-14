@@ -127,28 +127,18 @@ function render() {
         titlesList.innerHTML = ''
         notes = getNotes()
         return notes.filter(note => {
-            if (note.favorite === true) {
                 let timeDispl = moment(note.id).fromNow()
                 let title = document.createElement('h5')
                 console.log(note)
-                title.innerHTML = `${note.title} ${starIconImg}`
+                title.innerHTML = `${note.favorite === true?note.title +  ' '  +starIconImg: note.title}`
                 title.setAttribute('id', note.id)
                 title.setAttribute('active', '')
                 title.setAttribute('title', `Created: ${timeDispl}`)
                 titlesList.appendChild(title)
                 
-            }else {
-                let timeDispl = moment(note.id).fromNow()
-                let title = document.createElement('h5')
-                console.log(note)
-                title.innerHTML = `${note.title}`
-                title.setAttribute('id', note.id)
-                title.setAttribute('active', '')
-                title.setAttribute('title', `Created: ${timeDispl}`)
-                titlesList.appendChild(title)
             }
 
-        })
+        )
     }
 }
 
@@ -181,6 +171,7 @@ function renderClickedNote(e) {
     // clickedId = e.target
     clickedId = Number(e.target.id)
     getNotes().filter((note, index) => {
+        console.log('Hello')
         if (note.id == clickedId) {
             tracker(clickedId, index)
             // editor.addEventListener('input', saveNotes)
@@ -260,7 +251,7 @@ function loadOnStart() {
 function activeNavEl(e) {
     e.preventDefault()
     clickedNavElement = e.target.getAttribute("value")
-    clickedNavElement == 'Add Note' ?window.location.href = './':DivTitle.setAttribute('placeholder', clickedNavElement)
+    clickedNavElement == 'Add Note' ?window.location.href = './':leftDivTitle.setAttribute('placeholder', clickedNavElement)
 }
 
 // Sätter statestik på notes:en
