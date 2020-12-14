@@ -47,13 +47,16 @@ navListEl.addEventListener('click', activeNavEl) // renderTitle
 navListEl.addEventListener('click', renderTitle) // renderTitle
 starIcon.addEventListener('click', addToFavorite)
 textTemplates.addEventListener('click', addExempleTemplate)
+editorEl.addEventListener('keyup', modifieNote)
+noteTitle.addEventListener('keyup', modifieNote)
+
 
 
 // Global Variables
 let notes = []
 let isFirstTime = false
 let clickedId = null
-let clickedNavElement = null
+let clickedNavElement = 'Search notes...'
 let tmpTemplate = null
 let tempNote = null
 let currentFavIcon = false
@@ -81,23 +84,26 @@ let starIconImg = `<svg class="yellowStar" xmlns="http://www.w3.org/2000/svg" xm
     // let activeNav
     // Functions'
 
-    function welcomeMessage() {
-        
-        if(localStorage.getItem('firstTimeVisiting') < 1) {
-            let infoMsgHolder = document.querySelector('.msg')
-            infoMsgHolder.innerHTML = infoMsg
-            localStorage.setItem('firstTimeVisiting', false)
-            document.querySelector('.msg button').addEventListener('click', closeInfo)
-        }
-    }
+function searchNote(e) {
+    let searchInput = e.target.value
 
-    function modifieNote() {
+}
+
+function welcomeMessage() {
+    
+    if(localStorage.getItem('firstTimeVisiting') < 1) {
+        let infoMsgHolder = document.querySelector('.msg')
+        infoMsgHolder.innerHTML = infoMsg
+        localStorage.setItem('firstTimeVisiting', false)
+        document.querySelector('.msg button').addEventListener('click', closeInfo)
+    }
+}
+
+function modifieNote() {
+    
     let noteIndex = findeNoteIndex()
     let currentNote = notes[noteIndex]
     
-     
-    
-
     notes[noteIndex] = {
         id: currentNote.id,
         title: noteTitle.value,
@@ -107,8 +113,10 @@ let starIconImg = `<svg class="yellowStar" xmlns="http://www.w3.org/2000/svg" xm
         favorite: true,
     }
     
+    // renderTitle()
     saveNotes()
-    location.reload();
+    // location.reload();
+    renderTitle()
 }
 
 function createNote(title, content, contentTemplate) {
@@ -142,19 +150,19 @@ function renderClickedNote(e) {
     getNotes().filter((note, index) => {
         if (note.id == clickedId) {
             tracker(clickedId, index)
+            // editor.addEventListener('input', saveNotes)
             textTemplates.remove()
             // infoText.remove()
             noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
             deleteBtn.setAttribute('value', index)
-            updateBtn.setAttribute('value', index) 
+            updateBtn.remove()
+            saveBtn.remove() 
             editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length - 1])
             editor.ui.view.editable.element.classList.add(note.contentTemplate)
             let favoritIcon = document.createElement('span')
             favoritIcon.innerHTML = ""
             editor.setData(`${note.content}`) // Tog bort Title, pga blir dubbelt varje gång man sparar
-                // return note
-                
-
+            
         }
         if (note.favorite === true) {
             star.setAttribute('fill', '#FFDF93')
@@ -175,7 +183,7 @@ function viewDemo() {
 
 }
 
-function renderTitle(e) {
+function renderTitle() {
 
     if (getNotes()) {
         titlesList.innerHTML = ''
@@ -197,6 +205,8 @@ function renderTitle(e) {
     }
 }
 
+
+
 function loadOnStart() {
     welcomeMessage()
     if (getNotes()) {
@@ -217,7 +227,7 @@ function loadOnStart() {
 function activeNavEl(e) {
     e.preventDefault()
     clickedNavElement = e.target.getAttribute("value")
-    leftDivTitle.setAttribute('placeholder', clickedNavElement);
+    clickedNavElement == 'Add Note' ?window.location.href = './':DivTitle.setAttribute('placeholder', clickedNavElement)
 }
 
 // Sätter statestik på notes:en
@@ -229,48 +239,7 @@ function tracker(noteId) {
     saveNotes()
 }
 
-function searchNote(e) {
-    let searchInput = e.target.value
-    
-    if (getNotes()) {
-        notes = getNotes()
-        notes.filter(note => {
-            if (note.title.toUpperCase().includes(searchInput.toUpperCase())) {
-                titlesList.innerHTML = ''
-                return note
-            }
-            }).map(note => {
 
-           
-                let timeDispl = moment(note.id).fromNow()
-                let title = document.createElement('h5')
-
-
-                switch (clickedNavElement.toUpperCase()) {
-                    case 'Search notes...'.toLocaleUpperCase():
-                        title.innerHTML = note.favorit = true ? note.title + starIconImg : note.title
-                        break;
-                    case 'Favorites: Search ...'.toLocaleUpperCase():
-                        title.innerHTML = `${note.title} ${starIconImg}`
-                        break;
-
-                    case 'Statistics: Search ...'.toLocaleUpperCase():
-                        title.innerHTML = `${note.title} visited: ${note.visited} times.` 
-                        break;
-
-                    default:
-                        console.log('Nothing!')
-                        break;
-                }
-
-                title.setAttribute('id', note.id)
-                title.setAttribute('title', `Created: ${timeDispl}`)
-                titlesList.appendChild(title)
-           
-
-        })
-    }
-}
 
 // Hämtar hem arrayen med alla objekt som vi har sparat i LocalStorage
 function getNotes() {

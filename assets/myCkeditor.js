@@ -16,7 +16,9 @@ BalloonEditor
         } )
         .then( editor => {
             window.editor = editor;
-                   
+            // let focusedEditor = editor.editing.view.focus()
+
+            
         } )
         .catch( error => {
             console.error( error );
