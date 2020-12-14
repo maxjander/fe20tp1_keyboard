@@ -37,14 +37,14 @@ let rbs = document.querySelectorAll('input[name="text-temp"]')
     // Event listeners
 editorEl.addEventListener('click', e => e.target)
 saveBtn.addEventListener('click', saveBtnClicked)
-updateBtn.addEventListener('click', modifieNote)
+// updateBtn.addEventListener('click', modifieNote)
 // editorEl.addEventListener('input', modifieNote)
 deleteBtn.addEventListener('click', deleteNote)
 leftDiv.addEventListener('click', renderClickedNote) // Find the id of the title you click on
 OnloadWindow.addEventListener('load', loadOnStart)
 searchBar.addEventListener('input', searchNote)
 navListEl.addEventListener('click', activeNavEl) // renderTitle
-navListEl.addEventListener('click', renderTitle) // renderTitle
+navListEl.addEventListener('click', render) // renderTitle
 starIcon.addEventListener('click', addToFavorite)
 textTemplates.addEventListener('click', addExempleTemplate)
 editorEl.addEventListener('keyup', modifieNote)
@@ -100,8 +100,10 @@ function welcomeMessage() {
 }
 
 function modifieNote() {
-    
+    notes = getNotes()
     let noteIndex = findeNoteIndex()
+    console.log(noteIndex)
+    console.log(render())
     let currentNote = notes[noteIndex]
     
     notes[noteIndex] = {
@@ -110,13 +112,44 @@ function modifieNote() {
         content: editorEl.innerHTML,
         contentTemplate: currentNote.contentTemplate,
         dateModified: Date.now(),
-        favorite: true,
+        favorite: currentNote.favorite,
     }
     
     // renderTitle()
     saveNotes()
+    console.log(notes)
     // location.reload();
-    renderTitle()
+    render()
+}
+
+function render() {
+    if (getNotes()) {
+        titlesList.innerHTML = ''
+        notes = getNotes()
+        return notes.filter(note => {
+            if (note.favorite === true) {
+                let timeDispl = moment(note.id).fromNow()
+                let title = document.createElement('h5')
+                console.log(note)
+                title.innerHTML = `${note.title} ${starIconImg}`
+                title.setAttribute('id', note.id)
+                title.setAttribute('active', '')
+                title.setAttribute('title', `Created: ${timeDispl}`)
+                titlesList.appendChild(title)
+                
+            }else {
+                let timeDispl = moment(note.id).fromNow()
+                let title = document.createElement('h5')
+                console.log(note)
+                title.innerHTML = `${note.title}`
+                title.setAttribute('id', note.id)
+                title.setAttribute('active', '')
+                title.setAttribute('title', `Created: ${timeDispl}`)
+                titlesList.appendChild(title)
+            }
+
+        })
+    }
 }
 
 function createNote(title, content, contentTemplate) {
@@ -155,7 +188,7 @@ function renderClickedNote(e) {
             // infoText.remove()
             noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
             deleteBtn.setAttribute('value', index)
-            updateBtn.remove()
+            // updateBtn.setAttribute('value', index) 
             saveBtn.remove() 
             editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length - 1])
             editor.ui.view.editable.element.classList.add(note.contentTemplate)
@@ -183,27 +216,27 @@ function viewDemo() {
 
 }
 
-function renderTitle() {
+// function renderTitle(e) {
 
-    if (getNotes()) {
-        titlesList.innerHTML = ''
-        notes = getNotes()
-        notes.filter(note => {
-            if (note.favorite === true) {
-                let timeDispl = moment(note.id).fromNow()
-                let title = document.createElement('h5')
+//     if (getNotes()) {
+//         titlesList.innerHTML = ''
+//         notes = getNotes()
+//         notes.filter(note => {
+//             if (note.favorite === true) {
+//                 let timeDispl = moment(note.id).fromNow()
+//                 let title = document.createElement('h5')
+//                 console.log('render title')
+//                 title.innerHTML = `${note.title} ${starIconImg}`
+//                 title.setAttribute('id', note.id)
+//                 title.setAttribute('active', '')
+//                 title.setAttribute('title', `Created: ${timeDispl}`)
+//                 titlesList.appendChild(title)
                 
-                title.innerHTML = `${note.title} ${starIconImg}`
-                title.setAttribute('id', note.id)
-                title.setAttribute('active', '')
-                title.setAttribute('title', `Created: ${timeDispl}`)
-                titlesList.appendChild(title)
-                
-            }
+//             }
 
-        })
-    }
-}
+//         })
+//     }
+// }
 
 
 
@@ -262,20 +295,21 @@ function deleteNote() {
     location.reload();
 }
 
-function createNote(title, content, contentTemplate) {
+// function createNote(title, content, contentTemplate) {
 
-    notes.push({
-        id: Date.now(),
-        title,
-        content,
-        contentTemplate,
-        dateModified: null,
-        favorite: currentFavIcon,
-        visited: 0
-    })
 
-    saveNotes()
-}
+//     notes.push({
+//         id: Date.now(),
+//         title,
+//         content,
+//         contentTemplate,
+//         dateModified: null,
+//         favorite: currentFavIcon,
+//         visited: 0
+//     })
+
+//     saveNotes()
+// }
 
 
 
