@@ -25,7 +25,7 @@ let OnloadWindow = window
 let favoritNote = document.querySelector('#favorit-note')
 let star = document.querySelector('#star')
 let starIcon = document.querySelector('#staritow')
-let searchBar = document.querySelector('#searchbar')
+let searchBar = document.querySelector('.searchbar')
 let navListEl = document.querySelector('.nav-list')
 let searchNav = document.querySelector('[data-tooltip="Search"]')
 let favoritesNav = document.querySelector('[data-tooltip="Favorites"]')
@@ -87,6 +87,28 @@ let starIconImg = `<svg class="yellowStar" xmlns="http://www.w3.org/2000/svg" xm
 function searchNote(e) {
     let searchInput = e.target.value
 
+    notes.filter(note=> {
+        console.log('Outside the if')
+        if(searchInput.toUpperCase() == note.title.toUpperCase() && searchInput != ''){
+            console.log('Fadil fick p-boot!')
+        }
+    })
+    // if(searchBar.getAttribute('placeholder') === 'Search-Favorit:...'){
+    //     titlesList.innerHTML = ' '
+    //    notes.filter(note => {
+    //        if ( searchInput.toUpperCase() ===  note.title) {
+    //         let timeDispl = moment(note.id).fromNow()
+    //                 let title = document.createElement('h5')
+    //                 title.innerHTML = `${note.title} ${starIconImg}`
+    //                 title.setAttribute('id', note.id)
+    //                 title.setAttribute('active', '')
+    //                 title.setAttribute('title', `Created: ${timeDispl}`)
+    //                 titlesList.appendChild(title)
+
+    //     }
+    //    })
+        
+    // }
 }
 
 function welcomeMessage() {
@@ -114,7 +136,10 @@ function modifieNote() {
         favorite: currentNote.favorite,
     }    
     }else {
-        createNote(noteTitle.value,editorEl.innerHTML, selectedTemp)
+        console.log(addExempleTemplate())
+        createNote(noteTitle.value,editorEl.innerHTML, addExempleTemplate())
+        console.log(addExempleTemplate())
+        render()
     }
     
     // renderTitle()
@@ -186,7 +211,8 @@ function renderClickedNote(e) {
             textTemplates.remove()
             // infoText.remove()
             noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
-            deleteBtn.setAttribute('value', index)
+            deleteBtn.setAttribute('value', note.id)
+            deleteBtn.classList.remove('hidden')
             // updateBtn.setAttribute('value', index) 
             editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length - 1])
             editor.ui.view.editable.element.classList.add(note.contentTemplate)
@@ -214,30 +240,6 @@ function viewDemo() {
 
 }
 
-// function renderTitle(e) {
-
-//     if (getNotes()) {
-//         titlesList.innerHTML = ''
-//         notes = getNotes()
-//         notes.filter(note => {
-//             if (note.favorite === true) {
-//                 let timeDispl = moment(note.id).fromNow()
-//                 let title = document.createElement('h5')
-//                 console.log('render title')
-//                 title.innerHTML = `${note.title} ${starIconImg}`
-//                 title.setAttribute('id', note.id)
-//                 title.setAttribute('active', '')
-//                 title.setAttribute('title', `Created: ${timeDispl}`)
-//                 titlesList.appendChild(title)
-                
-//             }
-
-//         })
-//     }
-// }
-
-
-
 function loadOnStart() {
     welcomeMessage()
     if (getNotes()) {
@@ -258,7 +260,7 @@ function loadOnStart() {
 function activeNavEl(e) {
     e.preventDefault()
     clickedNavElement = e.target.getAttribute("value")
-    clickedNavElement == 'Add Note' ?window.location.href = './':searchBar.setAttribute('placeholder', clickedNavElement)
+    clickedNavElement == 'Add-note' ?location.reload(): searchBar.setAttribute('placeholder', clickedNavElement)
 }
 
 // Sätter statestik på notes:en
@@ -286,31 +288,14 @@ function saveNotes() {
     localStorage.setItem('Notes', JSON.stringify(notes))
 }
 
-
-function deleteNote() {
-    notes.splice(deleteBtn.value, 1)
+function deleteNote(e) {
+    let id = e.target.value
+    let theFoundIndex = findeNoteIndex(id)
+    notes.splice(theFoundIndex, 1)
     saveNotes()
-    location.reload();
+    theFoundIndex= null
+    location.reload()
 }
-
-// function createNote(title, content, contentTemplate) {
-
-
-//     notes.push({
-//         id: Date.now(),
-//         title,
-//         content,
-//         contentTemplate,
-//         dateModified: null,
-//         favorite: currentFavIcon,
-//         visited: 0
-//     })
-
-//     saveNotes()
-// }
-
-
-
 
 // För att ändra typsnitt
 function selectedTemp() {
@@ -361,16 +346,5 @@ function addToFavorite() {
 function closeInfo() {
     document.querySelector('.msg').innerHTML = ''
     createNote('Information Note', infoMsg, 'temp1')
-    // notes.push({
-    //     id: Date.now(),
-    //     title:'Information Note',
-    //     content: infoMsg,
-    //     contentTemplate: 'temp1',
-    //     dateModified: null,
-    //     favorite: currentFavIcon,
-    //     visited: 0
-    // })
-
-    // saveNotes()
     location.reload()
 }

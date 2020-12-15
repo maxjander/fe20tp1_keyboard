@@ -51,27 +51,27 @@
                     </svg>
                 </i>
             </li>
-            <li href="#" class="menu__item" data-tooltip="Search" value="Search notes...">
-                <i class="material-icons" value="Search notes...">search</i>
+            <li href="#" class="menu__item" data-tooltip="Search" value="Search-Notes...">
+                <i class="material-icons" value="Search-Notes...">search</i>
             </li>
-            <li href="#" class="menu__item" data-tooltip="Favorites" value="Favorites: Search ...">
-                <i class="material-icons" value="Favorites: Search ...">stars</i>
+            <li href="#" class="menu__item" data-tooltip="Favorites" value="Search-Favorit:...">
+                <i class="material-icons" value="Search-Favorit:...">stars</i>
             </li>
-            <li href="#" class="menu__item" data-tooltip="Statistics" value="Statistics: Search ...">
-                <i class="material-icons" value="Statistics: Search ...">analytics</i>
+            <li href="#" class="menu__item" data-tooltip="Statistics" value="Search-Statistics:...">
+                <i class="material-icons" value="Search-Statistics:...">analytics</i>
             </li>
             <!-- <li href="./" class="menu__item" data-tooltip="Settings" value="search">
                         <i class="material-icons" value="search">settings</i>
                     </li> -->
-            <li href="./" class="menu__item" data-tooltip="New note" value="Add Note">
-                <i class="material-icons" value="Add Note">add_circle</i>
+            <li href="./" class="menu__item" data-tooltip="New note" value="Add-note">
+                <i class="material-icons" value="Add-note">add_circle</i>
             </li>
         </ul>
 
     </nav>
     <main>
         <div id="left">
-            <input id="searchbar" placeholder="Search notes..." type="text" />
+            <input class="searchbar" placeholder="Search notes..." type="text" />
             <div class="allTitles"></div>
         </div>
         <div id='right' class="subPage">
@@ -81,11 +81,11 @@
                 <br>
                 <h4 id="templateTitle"> Choose Text Templates: </h4>
                 <br>
-                <label>Green Style</label>
+                <label>Standard</label>
                 <input type="radio" id="template1" name="text-temp" value="temp1">
                 <label>Purple Style</label>
                 <input type="radio" id="template2" name="text-temp" value="temp2">
-                <label>Black Style</label>
+                <label>Green Style</label>
                 <input type="radio" id="template3" name="text-temp" value="temp3">
                 <label>Warning Style</label>
                 <input type="radio" id="template4" name="text-temp" value="temp4">
@@ -93,7 +93,7 @@
 
             <input id="star" type="checkbox" />
 
-            <svg class="my-image hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            <svg class="my-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 preserveAspectRatio="xMidYMid" width="17" height="16" viewBox="0 0 17 16">
                 <path id="staritow"
                     d="M9 1L11.2857 6.71429H17L12.4286 10.7143L14.1429 17L9 13L3.85714 17L5.57143 10.7143L1 6.71429H6.71429L9 1Z" />
@@ -102,7 +102,7 @@
             </div>
             <div class="btns">
                 <!-- <button id="save-btn">Save</button> -->
-                <i id="delete-btn" class="material-icons">delete</i>
+                <i id="delete-btn" class="material-icons hidden">delete</i>
                 <!-- <button id="delete-btn" hide>delete</button> -->
             </div>
             <div class="msg">
