@@ -275,3 +275,21 @@ input[type="checkbox"] + .my-image {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 1rem;  
 }
+
+.hidden {
+  display:none;
+}
+#delete-btn{
+  position:absolute;
+  bottom: 15px;
+  right:15px;
+  color:#0056A6;
+}
+#delete-btn:hover{
+color:#003465;
+cursor:pointer;
+}
+
+.allTitles h5 {
+  cursor:pointer;
+}

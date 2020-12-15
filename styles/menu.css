@@ -20,6 +20,7 @@ html {
     text-decoration: none;
     color:#ffffff;
     transition: background 0.3s;
+    cursor:pointer;
 }
 
 .menu__item > li {

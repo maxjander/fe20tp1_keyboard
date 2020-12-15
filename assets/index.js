@@ -36,7 +36,7 @@ let leftDivTitle = document.querySelector('#left input')
 let rbs = document.querySelectorAll('input[name="text-temp"]')
     // Event listeners
 editorEl.addEventListener('click', e => e.target)
-saveBtn.addEventListener('click', saveBtnClicked)
+// saveBtn.addEventListener('click', saveBtnClicked)
 // updateBtn.addEventListener('click', modifieNote)
 // editorEl.addEventListener('input', modifieNote)
 deleteBtn.addEventListener('click', deleteNote)
@@ -184,7 +184,6 @@ function renderClickedNote(e) {
             noteTitle.value = note.title // noteTitle.value ->från vårat form   |  från localStorage -> note.title
             deleteBtn.setAttribute('value', index)
             // updateBtn.setAttribute('value', index) 
-            saveBtn.remove() 
             editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length - 1])
             editor.ui.view.editable.element.classList.add(note.contentTemplate)
             let favoritIcon = document.createElement('span')
@@ -255,7 +254,7 @@ function loadOnStart() {
 function activeNavEl(e) {
     e.preventDefault()
     clickedNavElement = e.target.getAttribute("value")
-    clickedNavElement == 'Add Note' ?window.location.href = './':DivTitle.setAttribute('placeholder', clickedNavElement)
+    clickedNavElement == 'Add Note' ?window.location.href = './':searchBar.setAttribute('placeholder', clickedNavElement)
 }
 
 // Sätter statestik på notes:en
