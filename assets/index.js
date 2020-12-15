@@ -104,6 +104,7 @@ function modifieNote() {
     let noteIndex = findeNoteIndex()
     let currentNote = notes[noteIndex]
     
+    if(clickedId !== null) {
     notes[noteIndex] = {
         id: currentNote.id,
         title: noteTitle.value,
@@ -111,6 +112,9 @@ function modifieNote() {
         contentTemplate: currentNote.contentTemplate,
         dateModified: Date.now(),
         favorite: currentNote.favorite,
+    }    
+    }else {
+        createNote(noteTitle.value,editorEl.innerHTML, selectedTemp)
     }
     
     // renderTitle()
@@ -147,7 +151,8 @@ function render() {
     }
 }
 
-function createNote(title, content, contentTemplate) {
+function createNote(title, content, contentTemplate ) {
+    clickedId = Date.now()
 
     notes.push({
         id: Date.now(),
@@ -158,7 +163,6 @@ function createNote(title, content, contentTemplate) {
         favorite: currentFavIcon,
         visited: 0
     })
-
     saveNotes()
 }
 
