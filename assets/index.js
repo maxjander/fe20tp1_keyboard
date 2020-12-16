@@ -89,7 +89,7 @@ function searchNote(e) {
     let searchInput = e.target.value // Det vi skriver i searchbar:en
     titlesList.innerHTML = ''
     notes.filter(note=> {
-        if(note.favorite == true && note.title.toUpperCase().includes(searchInput.toUpperCase()) && searchInput != null){
+        if(note.favorite == true && note.title.toUpperCase().includes(searchInput?searchInput.toUpperCase():searchInput)){
             let timeDispl = moment(note.id).fromNow()
                 let title = document.createElement('h5')
                 title.innerHTML = `${note.title} ${starIconImg}`
