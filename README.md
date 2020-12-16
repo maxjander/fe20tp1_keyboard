@@ -36,4 +36,4 @@ Inga “stora” JS-ramverk/bibliotek får förekomma, ex. JQuery, React, Angula
 Semantisk HTML - grundläggande tillgänglighetsanpassning
 
 # <a name="demo"></a> Project demo
-* [Demo site](http://fe20tp_keyboard.surge.sh/ "Surge Demo of Quire")
+* [Demo site](http://fe20tp1_keyboard.surge.sh/ "Surge Demo of Quire")
