@@ -43,7 +43,8 @@ deleteBtn.addEventListener('click', deleteNote)
 leftDiv.addEventListener('click', renderClickedNote) // Find the id of the title you click on
 OnloadWindow.addEventListener('load', loadOnStart)
 searchBar.addEventListener('input', searchNote)
-navListEl.addEventListener('click', activeNavEl) // renderTitle
+favoritesNav.addEventListener('click', searchNote)
+navListEl.addEventListener('click', activeNavEl) 
 navListEl.addEventListener('click', render) // renderTitle
 starIcon.addEventListener('click', addToFavorite)
 textTemplates.addEventListener('click', addExempleTemplate)
@@ -85,30 +86,19 @@ let starIconImg = `<svg class="yellowStar" xmlns="http://www.w3.org/2000/svg" xm
     // Functions'
 
 function searchNote(e) {
-    let searchInput = e.target.value
-
+    let searchInput = e.target.value // Det vi skriver i searchbar:en
+    titlesList.innerHTML = ''
     notes.filter(note=> {
-        console.log('Outside the if')
-        if(searchInput.toUpperCase() == note.title.toUpperCase() && searchInput != ''){
-            console.log('Fadil fick p-boot!')
+        if(note.favorite == true && note.title.toUpperCase().includes(searchInput.toUpperCase()) && searchInput != null){
+            let timeDispl = moment(note.id).fromNow()
+                let title = document.createElement('h5')
+                title.innerHTML = `${note.title} ${starIconImg}`
+                title.setAttribute('id', note.id)
+                title.setAttribute('active', '')
+                title.setAttribute('title', `Created: ${timeDispl}`)
+                titlesList.appendChild(title)
         }
     })
-    // if(searchBar.getAttribute('placeholder') === 'Search-Favorit:...'){
-    //     titlesList.innerHTML = ' '
-    //    notes.filter(note => {
-    //        if ( searchInput.toUpperCase() ===  note.title) {
-    //         let timeDispl = moment(note.id).fromNow()
-    //                 let title = document.createElement('h5')
-    //                 title.innerHTML = `${note.title} ${starIconImg}`
-    //                 title.setAttribute('id', note.id)
-    //                 title.setAttribute('active', '')
-    //                 title.setAttribute('title', `Created: ${timeDispl}`)
-    //                 titlesList.appendChild(title)
-
-    //     }
-    //    })
-        
-    // }
 }
 
 function welcomeMessage() {
@@ -136,10 +126,8 @@ function modifieNote() {
         favorite: currentNote.favorite,
     }    
     }else {
-        console.log(addExempleTemplate())
-        createNote(noteTitle.value,editorEl.innerHTML, addExempleTemplate())
-        console.log(addExempleTemplate())
-        render()
+        tmpTemplate = selectedTemp()
+        tmpTemplate != undefined? createNote(noteTitle.value,editorEl.innerHTML, tmpTemplate,currentFavIcon ):''
     }
     
     // renderTitle()
@@ -152,7 +140,7 @@ function render() {
     if (getNotes()) {
         titlesList.innerHTML = ''
         notes = getNotes()
-        return notes.filter(note => {
+         notes.filter(note => {
             if (note.favorite === true) {
                 let timeDispl = moment(note.id).fromNow()
                 let title = document.createElement('h5')
@@ -162,7 +150,8 @@ function render() {
                 title.setAttribute('title', `Created: ${timeDispl}`)
                 titlesList.appendChild(title)
                 
-            }else {
+            }
+            else {
                 let timeDispl = moment(note.id).fromNow()
                 let title = document.createElement('h5')
                 title.innerHTML = `${note.title}`
@@ -176,16 +165,16 @@ function render() {
     }
 }
 
-function createNote(title, content, contentTemplate ) {
+function createNote(title, content,template,favorite ) {
     clickedId = Date.now()
 
     notes.push({
         id: Date.now(),
         title,
         content,
-        contentTemplate,
+        contentTemplate:template,
         dateModified: null,
-        favorite: currentFavIcon,
+        favorite,
         visited: 0
     })
     saveNotes()
@@ -216,13 +205,9 @@ function renderClickedNote(e) {
             // updateBtn.setAttribute('value', index) 
             editor.ui.view.editable.element.classList.remove(editor.ui.view.editable.element.classList[editor.ui.view.editable.element.classList.length - 1])
             editor.ui.view.editable.element.classList.add(note.contentTemplate)
-            let favoritIcon = document.createElement('span')
-            favoritIcon.innerHTML = ""
+            note.favorite ===true?starIcon.setAttribute('fill', '#FFDF93'):starIcon.setAttribute('fill', '#FFFFFF')
             editor.setData(`${note.content}`) // Tog bort Title, pga blir dubbelt varje gång man sparar
             
-        }
-        if (note.favorite === true) {
-            star.setAttribute('fill', '#FFDF93')
         }
     })
 }
@@ -260,7 +245,7 @@ function loadOnStart() {
 function activeNavEl(e) {
     e.preventDefault()
     clickedNavElement = e.target.getAttribute("value")
-    clickedNavElement == 'Add-note' ?location.reload(): searchBar.setAttribute('placeholder', clickedNavElement)
+    clickedNavElement == 'Add-note' ? location.reload():searchBar.setAttribute('placeholder', clickedNavElement)    
 }
 
 // Sätter statestik på notes:en
@@ -310,17 +295,17 @@ function selectedTemp() {
     return selectedValue
 }
 
-// När save
-function saveBtnClicked(e) {
-    let selected = selectedTemp()
-    createNote(
-        noteTitle.value != '' ? noteTitle.value : 'Ingen rubrik!',
-        editorEl.innerHTML, selected
+// // När save
+// function saveBtnClicked(e) {
+//     let selected = selectedTemp()
+//     createNote(
+//         noteTitle.value != '' ? noteTitle.value : 'Ingen rubrik!',
+//         editorEl.innerHTML, selected
 
-    )
-    saveNotes()
-    location.reload();
-}
+//     )
+//     saveNotes()
+//     location.reload();
+// }
 
 
 
@@ -345,6 +330,6 @@ function addToFavorite() {
 // Close the information message box.
 function closeInfo() {
     document.querySelector('.msg').innerHTML = ''
-    createNote('Information Note', infoMsg, 'temp1')
+    createNote('Information Note', infoMsg, 'temp3')
     location.reload()
 }
